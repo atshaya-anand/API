@@ -72,9 +72,10 @@
               <label for="exampleInput2">Input 02</label>
               <input type="text" class="form-control" id="mat2" placeholder="Enter set 2" style="width:40%;">
             </div>
-          <button class="btn btn-primary" onclick = "getUnion()">Get Union</button>
-          <button class="btn btn-primary" onclick = "getIntersection()">Get Intersection</button>
-          <button class="btn btn-primary" onclick = "getDifference()">Get Difference</button><br/><br/>
+          <button class="btn btn-primary" onclick = "getTranspose()">Get Transpose</button>
+          <button class="btn btn-primary" onclick = "getLowDiagonal()">Get Lower Diagonal</button>
+          <button class="btn btn-primary" onclick = "getUpDiagonal()">Get Upper Diagonal</button>
+          <button class="btn btn-primary" onclick = "getSwivel()">Get Swivel</button><br/><br/>
           <button class="btn" onclick="moveNext()">Next Program!</button>
       </div>
       
@@ -146,6 +147,30 @@
             //console.log("test");
             url = "http://127.0.0.1:5000/getMinus?seta="+set01+"&setb="+set02;
             ajaxCall(url,"Difference");
+        }
+
+        function getTranspose(){
+          var mat01 = document.getElementById("mat1").value;
+          var mat02 = document.getElementById("mat2").value;
+          console.log(mat01,mat02);
+        }
+
+        function getLowDiagonal(){
+          var mat01 = document.getElementById("mat1").value;
+          var mat02 = document.getElementById("mat2").value;
+          console.log(mat01,mat02);
+        }
+
+        function getUpDiagonal(){
+          var mat01 = document.getElementById("mat1").value;
+          var mat02 = document.getElementById("mat2").value;
+          console.log(mat01,mat02);
+        }
+
+        function getSwivel(){
+          var mat01 = document.getElementById("mat1").value;
+          var mat02 = document.getElementById("mat2").value;
+          console.log(mat01,mat02);
         }
     
     </script>
