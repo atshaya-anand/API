@@ -1,6 +1,8 @@
-from flask import Flask
+from flask import Flask,request,jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 class Date:
     def __init__(self, d, m, y,h=0,mi=0,s=0):
@@ -105,19 +107,29 @@ def getDifference(date_obj1,date_obj2):
   return
 
 # function for union - contains all elements of both set
-@app.route('/getUnion',methods = ['Get'])
-def union(seta , setb):
+@app.route('/getUnion',methods = ['GET'])
+def union():
+    data = dict(request.args)
+    seta = data['seta']
+    setb = data['setb']
+    seta = seta.split(',')
+    setb = setb.split(',')
+    seta = [int(x) for x in seta]
+    setb = [int(x) for x in setb]
+    seta = set(seta)
+    setb = set(setb)
+    print('seta---',seta,'setb---',setb)
     result = set()
     for i in seta:
         result.add(i)
     for i in setb:
         result.add(i)
-    return result
+    return jsonify({'result':list(result)})
 
 
 # function for intersection - contains only common elements of set
 @app.route('/getIntersection',methods = ['GET'])
-def intersection(seta , setb):
+def intersection():
     result = set()
     for i in seta:
         if i in setb:
