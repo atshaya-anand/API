@@ -118,7 +118,7 @@ def union():
     setb = [int(x) for x in setb]
     seta = set(seta)
     setb = set(setb)
-    print('seta---',seta,'setb---',setb)
+    #print('seta---',seta,'setb---',setb)
     result = set()
     for i in seta:
         result.add(i)
@@ -130,21 +130,38 @@ def union():
 # function for intersection - contains only common elements of set
 @app.route('/getIntersection',methods = ['GET'])
 def intersection():
+    data = dict(request.args)
+    seta = data['seta']
+    setb = data['setb']
+    seta = seta.split(',')
+    setb = setb.split(',')
+    seta = [int(x) for x in seta]
+    setb = [int(x) for x in setb]
+    seta = set(seta)
+    setb = set(setb)
     result = set()
     for i in seta:
         if i in setb:
           result.add(i)
-    return result
-
+    return jsonify({'result':list(result)})
 
 # function for minus - contains elements which are not in another set
 @app.route('/getMinus',methods = ['GET'])
-def minus(seta , setb):
+def minus():
+    data = dict(request.args)
+    seta = data['seta']
+    setb = data['setb']
+    seta = seta.split(',')
+    setb = setb.split(',')
+    seta = [int(x) for x in seta]
+    setb = [int(x) for x in setb]
+    seta = set(seta)
+    setb = set(setb)
     result = set()
     for i in seta:
         if i not in setb:
             result.add(i)
-    return result
+    return jsonify({'result':list(result)})
 
 
 

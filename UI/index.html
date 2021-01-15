@@ -10,47 +10,145 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <title>API</title>
+    <title>API-Examples</title>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+      body{
+        font-family: 'Josefin Sans', sans-serif;
+        background-color: #353942;
+        color:aliceblue;
+      }
+    </style>
   </head>
   <body>
 
-        <div class="form-group">
-          <label for="exampleInputEmail1">Input 01</label>
-          <input type="text" class="form-control" id="input1" placeholder="Enter set 1">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Input 02</label>
-            <input type="text" class="form-control" id="input2" placeholder="Enter set 2">
-          </div>
-        <button class="btn btn-primary" onclick = "getUnion()">Get Union</button>
-      
+    
+    <div style="padding:50px;width: 60%; float:left; height:600px; ">
+      <h1>API-Example Programs</h1><br/>
 
+      <div id="dateDiff" style="padding-left: 50px;">
+        <h3>1 - DIFFERENCE OF DATE</h3><br/>
+        <h5>Difference between 2 given dates</h5><br/>
+          <div class="form-group">
+            <label for="exampleInput1">Input 01</label>
+            <input type="datetime-local" class="form-control" id="date1" placeholder="Enter date 1" style="width:40%;">
+          </div>
+          <div class="form-group">
+              <label for="exampleInput2">Input 02</label>
+              <input type="datetime-local" class="form-control" id="date2" placeholder="Enter date 2" style="width:40%;">
+            </div>
+          <button class="btn btn-primary" onclick = "getDateDiff()">Get Date Difference</button><br/<br/><br/>
+          <button class="btn" onclick="moveNext('dateDiff','setTheory')">Next Program!</button>
+      </div>
+
+
+      <div id="setTheory" style="padding-left: 50px;display: none;">
+        <h3>2 - SET THEORY OPERATIONS</h3><br/>
+        <h5>Union, Intersection and Difference</h5><br/>
+          <div class="form-group">
+            <label for="exampleInput1">Input 01</label>
+            <input type="text" class="form-control" id="set1" placeholder="Enter set 1" style="width:40%;">
+          </div>
+          <div class="form-group">
+              <label for="exampleInput2">Input 02</label>
+              <input type="text" class="form-control" id="set2" placeholder="Enter set 2" style="width:40%;">
+            </div>
+          <button class="btn btn-primary" onclick = "getUnion()">Get Union</button>
+          <button class="btn btn-primary" onclick = "getIntersection()">Get Intersection</button>
+          <button class="btn btn-primary" onclick = "getDifference()">Get Difference</button><br/><br/>
+          <button class="btn" onclick="moveNext('setTheory','matrix')">Next Program!</button>
+      </div>
+
+
+      <div id="matrix" style="padding-left: 50px;display: none;">
+        <h3>3 - MATRIX OPERATIONS</h3><br/>
+        <h5>Transpose, Lower Diagonal(left & right), Right Diagonal(left & right) and Swivel</h5><br/>
+          <div class="form-group">
+            <label for="exampleInput1">Input 01</label>
+            <input type="text" class="form-control" id="mat1" placeholder="Enter set 1" style="width:40%;">
+          </div>
+          <div class="form-group">
+              <label for="exampleInput2">Input 02</label>
+              <input type="text" class="form-control" id="mat2" placeholder="Enter set 2" style="width:40%;">
+            </div>
+          <button class="btn btn-primary" onclick = "getUnion()">Get Union</button>
+          <button class="btn btn-primary" onclick = "getIntersection()">Get Intersection</button>
+          <button class="btn btn-primary" onclick = "getDifference()">Get Difference</button><br/><br/>
+          <button class="btn" onclick="moveNext()">Next Program!</button>
+      </div>
+      
+    </div>
+        
+    <div style="margin:70px;padding:30px;width: 30%; float:left; height:400px;border-style: solid;border-color:wheat; ">
+      <h1>Result</h3><br/><br/>
+        <h3 id="title"></h5>
+        <p id="resultValue"></p><br/>
+    </div>
+    
     <!-- Optional JavaScript -->
     <script>
 
+        function ajaxCall(apiurl,title){
+            $.ajax({
+            url: apiurl, 
+            type:"GET",
+            error: function(data){
+              console.log("Server Error" , data);
+              console.log(data.getAllResponseHeaders());
+            },
+            success: function(data){
+              console.log(data);
+              document.getElementById("title").innerHTML = title;
+              document.getElementById('resultValue').innerHTML = data['result'];
+            }
+          });
+        }
+
+        function moveNext(id1,id2){
+          document.getElementById(id1).style.display = "none";
+          document.getElementById(id2).style.display = "block";
+          document.getElementById("title").innerHTML = '';
+              document.getElementById('resultValue').innerHTML = '';
+        }
+
+        function getDateDiff(){
+          var date01 = document.getElementById("date1").value;
+          var date02 = document.getElementById("date2").value;
+          console.log(date01,date02);
+        }
+
         function getUnion(){
-            console.log('Clicked');
-            var set01 = document.getElementById("input1").value;
-            var set02 = document.getElementById("input2").value;
+            //console.log('Clicked');
+            var set01 = document.getElementById("set1").value;
+            var set02 = document.getElementById("set2").value;
             console.log(set01,set02);
             //console.log("test");
-        
-			$.ajax({
-				url: "http://127.0.0.1:5000/getUnion?seta="+set01+"&setb="+set02, // fix this to your liking
-				type:"GET",
-				error: function(data){
-					console.log("Server Error" , data);
-					console.log(data.getAllResponseHeaders());
-				},
-				success: function(data){
-					// alert("hello"); // if it's failing on actual server check your server FIREWALL + SET UP CORS
-					console.log(data);
-				}
-			});
+            url = "http://127.0.0.1:5000/getUnion?seta="+set01+"&setb="+set02;
+            ajaxCall(url,"Union");
+        }
+
+        function getIntersection(){
+            //console.log('Clicked');
+            var set01 = document.getElementById("set1").value;
+            var set02 = document.getElementById("set2").value;
+            console.log(set01,set02);
+            //console.log("test");
+            url = "http://127.0.0.1:5000/getIntersection?seta="+set01+"&setb="+set02;
+            ajaxCall(url,"Intersection");
+        }
+
+        function getDifference(){
+            //console.log('Clicked');
+            var set01 = document.getElementById("set1").value;
+            var set02 = document.getElementById("set2").value;
+            console.log(set01,set02);
+            //console.log("test");
+            url = "http://127.0.0.1:5000/getMinus?seta="+set01+"&setb="+set02;
+            ajaxCall(url,"Difference");
         }
     
     </script>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     
   </body>
 </html>
