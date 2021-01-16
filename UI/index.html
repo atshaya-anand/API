@@ -63,19 +63,22 @@
 
       <div id="matrix" style="padding-left: 50px;display: none;">
         <h3>3 - MATRIX OPERATIONS</h3><br/>
-        <h5>Transpose, Lower Diagonal(left & right), Right Diagonal(left & right) and Swivel</h5><br/>
+        <h5>Transpose, Lower Diagonal(left & right), Right Diagonal(left & right)</h5><br/>
           <div class="form-group">
-            <label for="exampleInput1">Input 01</label>
-            <input type="text" class="form-control" id="mat1" placeholder="Enter set 1" style="width:40%;">
+            <label for="exampleInput1">Row</label>
+            <input type="text" class="form-control" id="row" placeholder="Enter no of rows" style="width:20%;">
           </div>
           <div class="form-group">
-              <label for="exampleInput2">Input 02</label>
-              <input type="text" class="form-control" id="mat2" placeholder="Enter set 2" style="width:40%;">
+              <label for="exampleInput2">Column</label>
+              <input type="text" class="form-control" id="col" placeholder="Enter no of columns" style="width:20%;">
+            </div>
+            <div class="form-group">
+              <label for="exampleInput2">Input 01</label>
+              <input type="text" class="form-control" id="mat" placeholder="Enter the matrix elements" style="width:50%;">
             </div>
           <button class="btn btn-primary" onclick = "getTranspose()">Get Transpose</button>
           <button class="btn btn-primary" onclick = "getLowDiagonal()">Get Lower Diagonal</button>
-          <button class="btn btn-primary" onclick = "getUpDiagonal()">Get Upper Diagonal</button>
-          <button class="btn btn-primary" onclick = "getSwivel()">Get Swivel</button><br/><br/>
+          <button class="btn btn-primary" onclick = "getUpDiagonal()">Get Upper Diagonal</button><br/><br/>
           <button class="btn" onclick="moveNext()">Next Program!</button>
       </div>
       

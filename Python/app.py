@@ -186,6 +186,98 @@ def minus():
             result.add(i)
     return jsonify({'result':list(result)})
 
+@app.route('/getTranspose',methods = ['GET'])
+def transpose():
+  data = dict(request.args)
+  print(data)
+  rows = int(data['row'])
+  cols = int(data['col'])
+  mat = data['mat']
+  strnL = mat.split(",")
+  count = 0
+  matrixA = []
+  for i in range(rows):
+    temp = []
+    for j in range(rows):
+      temp.append(int(strnL[count]))
+      count+=1
+    matrixA.append(temp)
+  print(rows,'----',cols,'----',matrixA)
+  result = [[0 for x in range(rows)] for y in range(cols)]
+  res = ''  
+  for i in range(cols): 
+    for j in range(rows): 
+      result[i][j] = matrixA[j][i] 
+      res = res + str(result[i][j]) + ' '
+    res = res + '<br/>'
+  #print("Transpose",type(res))
+  return jsonify({'result':res})
+
+
+# function to find lower diagonal elements
+@app.route('/getLowerDiagonal',methods = ['GET'])
+def lower_diagonal():
+    data = dict(request.args)
+    print(data)
+    rows = int(data['row'])
+    cols = int(data['col'])
+    mat = data['mat']
+    strnL = mat.split(",")
+    count = 0
+    matrixA = []
+    for i in range(rows):
+      temp = []
+      for j in range(rows):
+        temp.append(int(strnL[count]))
+        count+=1
+      matrixA.append(temp)
+    print(rows,'----',cols,'----',matrixA)
+    lower_left = []
+    lower_right = []
+    if rows == cols:
+      for i in range(rows):
+        for j in range(cols):
+          if j<i:
+            lower_left.append(matrixA[i][j])
+          if j>=1 and i+j > cols-1:
+            lower_right.append(matrixA[i][j])
+
+    print("Left-lower:",lower_left,"\nRight-lower:",lower_right)
+    res = "Lower Left Elements: "+str(lower_left)+"<br/>Lower Right Elements: "+str(lower_right)
+    return jsonify({'result':res})
+
+
+# function to find upper diagonal elements
+@app.route('/getUpperDiagonal',methods = ['GET'])
+def upper_diagonal():
+    data = dict(request.args)
+    print(data)
+    rows = int(data['row'])
+    cols = int(data['col'])
+    mat = data['mat']
+    strnL = mat.split(",")
+    count = 0
+    matrixA = []
+    for i in range(rows):
+      temp = []
+      for j in range(rows):
+        temp.append(int(strnL[count]))
+        count+=1
+      matrixA.append(temp)
+    print(rows,'----',cols,'----',matrixA)
+    upper_left = []
+    upper_right = []
+    if rows == cols:
+      for i in range(rows):
+        for j in range(cols):
+          if j>i:
+            upper_right.append(matrixA[i][j])
+          if j<=1 and i+j < cols-1:
+            upper_left.append(matrixA[i][j])
+          
+    print("Left-upper:",upper_left,"\nRight-upper:",upper_right)
+    res = "Upper Left Elements: "+str(upper_left)+"<br/>Upper Right Elements: "+str(upper_right)
+    return jsonify({'result':res})
 
 
 if __name__ == '__main__':

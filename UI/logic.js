@@ -60,25 +60,28 @@ function getDifference(){
 }
 
 function getTranspose(){
-  var mat01 = document.getElementById("mat1").value;
-  var mat02 = document.getElementById("mat2").value;
-  console.log(mat01,mat02);
+  var row = document.getElementById("row").value;
+  var col = document.getElementById("col").value;
+  var mat = document.getElementById("mat").value;
+  console.log(row,col,mat);
+  url = "http://127.0.0.1:5000/getTranspose?row="+row+"&col="+col+"&mat="+mat;
+  ajaxCall(url,"Transpose");
 }
 
 function getLowDiagonal(){
-  var mat01 = document.getElementById("mat1").value;
-  var mat02 = document.getElementById("mat2").value;
-  console.log(mat01,mat02);
+  var row = document.getElementById("row").value;
+  var col = document.getElementById("col").value;
+  var mat = document.getElementById("mat").value;
+  console.log(row,col,mat);
+  url = "http://127.0.0.1:5000/getLowerDiagonal?row="+row+"&col="+col+"&mat="+mat;
+  ajaxCall(url,"Lower Diagonal");
 }
 
 function getUpDiagonal(){
-  var mat01 = document.getElementById("mat1").value;
-  var mat02 = document.getElementById("mat2").value;
-  console.log(mat01,mat02);
-}
-
-function getSwivel(){
-  var mat01 = document.getElementById("mat1").value;
-  var mat02 = document.getElementById("mat2").value;
-  console.log(mat01,mat02);
+  var row = document.getElementById("row").value;
+  var col = document.getElementById("col").value;
+  var mat = document.getElementById("mat").value;
+  console.log(row,col,mat);
+  url = "http://127.0.0.1:5000/getUpperDiagonal?row="+row+"&col="+col+"&mat="+mat;
+  ajaxCall(url,"Upper Diagonal");
 }
