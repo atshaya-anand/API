@@ -17,7 +17,6 @@ def validate_date(date_obj):
   is_valid = 1
   is_leap = 0
   msg = ""
-  print(type(date_obj.year))
   if date_obj.year>=1800 and date_obj.year<9999 :
     if date_obj.year%4==0 or date_obj.year%100==0 :
       is_leap = 1
@@ -46,15 +45,37 @@ def validate_date(date_obj):
   return is_valid,msg
 
 
-@app.route('/getDateDifference',methods = ['GET'])
-def getDifference(date_obj1,date_obj2):
+@app.route('/getDateDiff',methods = ['GET'])
+def getDifference():
+  data = dict(request.args)
+  print(data)
+  date1 = data['date1']
+  date2 = data['date2']
+  print(date1,'----',date2)
+  date1 = date1.split("T")
+  date2 = date2.split("T")
+  date_1,time_1 = date1
+  date_2,time_2 = date2
+  time_1 = time_1.split(":")
+  time_2 = time_2.split(":")
+  hr_1,min_1 = time_1
+  hr_2,min_2 = time_2
+  print(hr_1,'----',min_1)
+  date_1 = date_1.split("-")
+  year_1,month_1,day_1 = date_1
+  date_2 = date_2.split("-")
+  year_2,month_2,day_2 = date_2
+  print(day_1,'----',month_1,'----',year_1)
+  date_obj1 = Date(int(day_1),int(month_1),int(year_1),int(hr_1),int(min_1),0)
+  date_obj2 = Date(int(day_2),int(month_2),int(year_2),int(hr_2),int(min_2),0)
+
   is_validD1,msg1 = validate_date(date_obj1)
   is_validD2,msg2 = validate_date(date_obj2)
   is_leap = 0
   if is_validD1 == 0:
-      return msg1
+      return jsonify({'result':msg1})
   if is_validD2 == 0:
-      return msg2
+      return jsonify({'result':msg2})
   if date_obj2.day < date_obj1.day:
     if date_obj2.month == 3:
       if (date_obj2.year%4 == 0 and date_obj2.year%100 == 0) or date_obj2.year%400 == 0:
@@ -104,7 +125,9 @@ def getDifference(date_obj1,date_obj2):
       day_diff = 31 - day_diff
     
   print(day_diff,month_diff,year_diff,hours_diff,minutes_diff,seconds_diff)
-  return
+  result = str(day_diff)+' days '+str(month_diff)+' months '+str(year_diff)+" years "+str(hours_diff)+' hours '+str(minutes_diff)+' minutes '+str(seconds_diff)+' seconds.'
+  print(result)
+  return jsonify({'result':result})
 
 # function for union - contains all elements of both set
 @app.route('/getUnion',methods = ['GET'])
