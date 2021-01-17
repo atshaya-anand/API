@@ -140,4 +140,49 @@ const getDateDifference = async () => {
     console.log (day_diff, month_diff, year_diff, hours_diff, minutes_diff, seconds_diff);
 } 
 
-module.exports = { getDateDifference };
+const getSetUnion = async () => {
+    var seta = [1, 2, 3, 4, 5, 6];
+    var setb = [3, 4, 11, 20];
+    var result = [];
+    for (var i = 0; i < seta.length; i++) {
+        result.push(seta[i]);
+    }
+    for (var i = 0; i < setb.length; i++) {
+        if(setb[i] in result){
+            continue;
+        }else
+        result.push(setb[i]);
+    }
+    return result;
+}
+
+const getSetIntersection = async () => {
+    var seta = [1, 2, 3, 4, 5, 6];
+    var setb = [3, 4, 11, 20];
+    var result = [];
+    for (var i = 0; i < seta.length; i++) {
+        if(seta[i] in setb){
+            result.push(seta[i]);
+        }
+    }
+    return result;
+}
+
+const getSetDiff = async () => {
+    var seta = [1, 2, 3, 4, 5, 6];
+    var setb = [3, 4, 11, 20];
+    var result = [];
+    for (var i = 0; i < seta.length; i++) {
+        if(seta[i] in setb){
+            continue;
+        }else{
+            result.push(seta[i]);
+        }
+    }
+    return result;
+}
+
+module.exports = { getDateDifference,
+                   getSetUnion,
+                   getSetIntersection,
+                   getSetDiff };
