@@ -5,11 +5,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const {getDateDifference, getSetUnion, getSetIntersection, getSetDiff} = require('./function.js');
+const {getDateDifference, getSetUnion, getSetIntersection, getSetDiff,dateDiff} = require('./function.js');
 
 app.get('/getDateDiff',async (req, res, next)=>{
     try{
-        res.send(await getDateDifference());
+        res.send(await dateDiff());
     }
     catch(err){
         next(err);

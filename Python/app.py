@@ -76,6 +76,75 @@ def getDifference():
       return jsonify({'result':msg1})
   if is_validD2 == 0:
       return jsonify({'result':msg2})
+  flag = 0
+  is_leap = 0
+  if (date_obj1.year > date_obj2.year):
+        flag = 1
+  elif (date_obj1.year == date_obj2.year) and (date_obj1.month > date_obj2.month):
+        flag = 1
+  elif (date_obj1.year == date_obj2.year) and (date_obj1.month == date_obj2.month) and (date_obj1.day > date_obj2.day) :
+        flag = 1
+
+  if flag == 1:       
+          swap = date_obj1
+          date_obj1 = date_obj2
+          date_obj2 = swap
+      
+  startYear = date_obj1.year
+  february = (startYear % 4 == 0 and startYear % 100 != 0) or (29 if startYear % 400 == 0 else 28)
+  daysInMonth = [31, february, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+ 
+
+  yearDiff = date_obj2.year - startYear
+  monthDiff = date_obj2.month - date_obj1.month
+  if (monthDiff < 0) :
+          yearDiff-=1
+          monthDiff += 12
+      
+  dayDiff = date_obj2.day - date_obj1.day
+  if (dayDiff < 0) :
+          if (monthDiff > 0) :
+              monthDiff-=1
+          else :
+              yearDiff-=1
+              monthDiff = 11;
+          
+          dayDiff += daysInMonth[date_obj1.month]
+  print(yearDiff , 'Y ' , monthDiff , 'M ' , dayDiff , 'D')
+  day_diff = dayDiff
+  month_diff = monthDiff
+  year_diff = yearDiff
+  hours_diff = date_obj2.hours - date_obj1.hours
+  minutes_diff = date_obj2.minutes - date_obj1.minutes
+  seconds_diff = date_obj2.seconds - date_obj1.seconds
+  print(day_diff,month_diff,year_diff,hours_diff,minutes_diff,seconds_diff)
+  if seconds_diff<0:
+    seconds_diff = 60 + seconds_diff
+    minutes_diff -=1
+  if minutes_diff<0:
+    minutes_diff = 60 + minutes_diff
+    hours_diff -=1
+  if hours_diff<0:
+    hours_diff = 24 + hours_diff
+    day_diff -=1
+  if day_diff<0:
+    month_diff -=1
+    if month_diff == -1:
+      month_diff = 12
+      year_diff = year_diff - 1
+      if year_diff%4==0 or year_diff%100==0:
+        is_leap = 1
+      else:
+        is_leap = 0
+    if month_diff==4 or month_diff==6 or month_diff==9 or month_diff==11:
+      day_diff = 30 - day_diff
+    elif month_diff == 2 and is_leap == 1:
+      day_diff = 29 - day_diff
+    elif month_diff == 2 and is_leap == 0:
+      day_diff = 28 - day_diff
+    else:
+      day_diff = 31 - day_diff
+  """
   if date_obj2.day < date_obj1.day:
     if date_obj2.month == 3:
       if (date_obj2.year%4 == 0 and date_obj2.year%100 == 0) or date_obj2.year%400 == 0:
@@ -124,7 +193,7 @@ def getDifference():
     else:
       day_diff = 31 - day_diff
     
-  print(day_diff,month_diff,year_diff,hours_diff,minutes_diff,seconds_diff)
+  print(day_diff,month_diff,year_diff,hours_diff,minutes_diff,seconds_diff)"""
   result = str(day_diff)+' days '+str(month_diff)+' months '+str(year_diff)+" years "+str(hours_diff)+' hours '+str(minutes_diff)+' minutes '+str(seconds_diff)+' seconds.'
   print(result)
   return jsonify({'result':result})
