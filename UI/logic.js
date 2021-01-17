@@ -25,7 +25,7 @@ function getDateDiff(){
   var date01 = document.getElementById("date1").value;
   var date02 = document.getElementById("date2").value;
   console.log(date01,date02);
-  url = "http://127.0.0.1:5000/getDateDiff?date1="+date01+"&date2="+date02;
+  var url = "http://127.0.0.1:5000/getDateDiff?date1="+date01+"&date2="+date02;
   ajaxCall(url,"Difference of Dates");
 }
 
@@ -35,7 +35,7 @@ function getUnion(){
     var set02 = document.getElementById("set2").value;
     console.log(set01,set02);
     //console.log("test");
-    url = "http://127.0.0.1:5000/getUnion?seta="+set01+"&setb="+set02;
+    var url = "http://127.0.0.1:5000/getUnion?seta="+set01+"&setb="+set02;
     ajaxCall(url,"Union");
 }
 
@@ -45,7 +45,7 @@ function getIntersection(){
     var set02 = document.getElementById("set2").value;
     console.log(set01,set02);
     //console.log("test");
-    url = "http://127.0.0.1:5000/getIntersection?seta="+set01+"&setb="+set02;
+    var url = "http://127.0.0.1:5000/getIntersection?seta="+set01+"&setb="+set02;
     ajaxCall(url,"Intersection");
 }
 
@@ -55,7 +55,7 @@ function getDifference(){
     var set02 = document.getElementById("set2").value;
     console.log(set01,set02);
     //console.log("test");
-    url = "http://127.0.0.1:5000/getMinus?seta="+set01+"&setb="+set02;
+    var url = "http://127.0.0.1:5000/getMinus?seta="+set01+"&setb="+set02;
     ajaxCall(url,"Difference");
 }
 
@@ -64,7 +64,7 @@ function getTranspose(){
   var col = document.getElementById("col").value;
   var mat = document.getElementById("mat").value;
   console.log(row,col,mat);
-  url = "http://127.0.0.1:5000/getTranspose?row="+row+"&col="+col+"&mat="+mat;
+  var url = "http://127.0.0.1:5000/getTranspose?row="+row+"&col="+col+"&mat="+mat;
   ajaxCall(url,"Transpose");
 }
 
@@ -73,7 +73,7 @@ function getLowDiagonal(){
   var col = document.getElementById("col").value;
   var mat = document.getElementById("mat").value;
   console.log(row,col,mat);
-  url = "http://127.0.0.1:5000/getLowerDiagonal?row="+row+"&col="+col+"&mat="+mat;
+  var url = "http://127.0.0.1:5000/getLowerDiagonal?row="+row+"&col="+col+"&mat="+mat;
   ajaxCall(url,"Lower Diagonal");
 }
 
@@ -82,6 +82,13 @@ function getUpDiagonal(){
   var col = document.getElementById("col").value;
   var mat = document.getElementById("mat").value;
   console.log(row,col,mat);
-  url = "http://127.0.0.1:5000/getUpperDiagonal?row="+row+"&col="+col+"&mat="+mat;
+  var url = "http://127.0.0.1:5000/getUpperDiagonal?row="+row+"&col="+col+"&mat="+mat;
   ajaxCall(url,"Upper Diagonal");
+}
+
+function getWord(){
+  var fig = document.getElementById('fig').value;
+  console.log(fig);
+  var url = "http://127.0.0.1:5000/getWord?fig="+fig;
+  ajaxCall(url,"Word Format");
 }
