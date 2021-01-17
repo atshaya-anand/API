@@ -33,7 +33,7 @@ function getUnion(){
     //console.log('Clicked');
     var set01 = document.getElementById("set1").value;
     var set02 = document.getElementById("set2").value;
-    console.log(set01,set02);
+    console.log(set01,'----',set02);
     //console.log("test");
     var url = "http://127.0.0.1:5000/getUnion?seta="+set01+"&setb="+set02;
     ajaxCall(url,"Union");

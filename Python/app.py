@@ -132,7 +132,9 @@ def getDifference():
 # function for union - contains all elements of both set
 @app.route('/getUnion',methods = ['GET'])
 def union():
+    print(request.args)
     data = dict(request.args)
+    print(data)
     seta = data['seta']
     setb = data['setb']
     seta = seta.split(',')
