@@ -1,6 +1,7 @@
 from flask import Flask,request,jsonify
 from flask_cors import CORS
 import random
+from utils import *
 
 app = Flask(__name__)
 CORS(app)
@@ -590,6 +591,13 @@ def getDecrypt():
   decrypted_msg = decrypt(key, msg)
   print(decrypted_msg)
   return jsonify({'result':decrypted_msg})
+
+@app.route('/getCheckSum',methods = ['GET'])
+def getCheckSum():
+  data = dict(request.args)
+  text = data["text"]
+  return jsonify({'result':md5sum(str.encode(text))})
+
 
 if __name__ == '__main__':
 	app.run(debug = True)

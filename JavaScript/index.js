@@ -43,5 +43,13 @@ app.get('/getSetDiff',async (req, res, next)=>{
     }
 });
 
+app.get('/getWord',async (req, res, next)=>{
+    try{
+        res.send(await getSetDiff());
+    }
+    catch(err){
+        next(err);
+    }
+});
 
 app.listen(8000,()=>console.log('Connected on PORT 8000'));

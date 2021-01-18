@@ -117,3 +117,10 @@ function decrypt(){
   var url = "http://127.0.0.1:5000/getDecrypt?msg="+msg+"&key="+key;
   ajaxCall(url,"Decrypted Message");
 }
+
+function getCheckSum(){
+  var text = document.getElementById('text').value;
+  console.log(fig);
+  var url = "http://127.0.0.1:5000/getCheckSum?text="+text;
+  ajaxCall(url,"Checksum Value");
+}
