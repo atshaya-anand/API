@@ -567,8 +567,9 @@ def getEncrypt():
   msg = data['msg']
   public, private = generate_keypair(17, 19)
   encrypted_msg = encrypt(private, msg)
-  encrypted_msg = ''.join(map(lambda x: str(x), encrypted_msg))
-  encrypted_msg = "Encrypted msg is "+encrypted_msg + " and key is "+str(private)
+  encrypted_msg = ' '.join(map(lambda x: str(x), encrypted_msg))
+  print(public, private,encrypted_msg)
+  encrypted_msg = "Encrypted msg is "+encrypted_msg + " and key is "+str(public)
   print(encrypted_msg)
   return jsonify({'result':encrypted_msg})
 
@@ -578,11 +579,16 @@ def getDecrypt():
   #print('------>',public)
   msg = data['msg']
   key = data['key']
+  key = key[1:-1]
   key = key.split(',')
+
   key = [int(x) for x in key]
   key = tuple(key)
-  print(key)
+  msg = msg.split(" ")
+  msg = [int(i) for i in msg] 
+  print(key,msg)
   decrypted_msg = decrypt(key, msg)
+  print(decrypted_msg)
   return jsonify({'result':decrypted_msg})
 
 if __name__ == '__main__':
