@@ -92,3 +92,28 @@ function getWord(){
   var url = "http://127.0.0.1:5000/getWord?fig="+fig;
   ajaxCall(url,"Word Format");
 }
+
+function encrypt(){
+  var msg = document.getElementById('msg').value;
+  console.log(msg);
+  document.getElementById('msg').style.display = "none";
+  document.getElementById('en').style.display = "none"
+  document.getElementById('en-msg').style.display = "block";
+  document.getElementById('key').style.display = "block";
+  document.getElementById('de').style.display = "block";
+  var url = "http://127.0.0.1:5000/getEncrypt?msg="+msg;
+  ajaxCall(url,"Encrypted Message");
+}
+
+function decrypt(){
+  var msg = document.getElementById('en-msg').value;
+  var key = document.getElementById('key').value;
+  console.log(msg);
+  document.getElementById('msg').style.display = "none";
+  document.getElementById('en').style.display = "none"
+  document.getElementById('en-msg').style.display = "block";
+  document.getElementById('de').style.display = "block";
+  document.getElementById('key').style.display = "block";
+  var url = "http://127.0.0.1:5000/getDecrypt?msg="+msg+"&key="+key;
+  ajaxCall(url,"Decrypted Message");
+}

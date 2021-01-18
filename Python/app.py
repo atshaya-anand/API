@@ -1,8 +1,11 @@
 from flask import Flask,request,jsonify
 from flask_cors import CORS
+import random
 
 app = Flask(__name__)
 CORS(app)
+
+public = tuple()
 
 class Date:
     def __init__(self, d, m, y,h=0,mi=0,s=0):
@@ -424,6 +427,163 @@ def getWords():
         final_words += temp
     print(final_words)
     return jsonify({'result':final_words})
+
+
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+'''
+Euclid's extended algorithm for finding the multiplicative inverse of two numbers
+'''
+def multiplicative_inverse(e, phi):
+    d = 0
+    x1 = 0
+    x2 = 1
+    y1 = 1
+    temp_phi = phi
+    
+    while e > 0:
+        temp1 = temp_phi/e
+        temp2 = temp_phi - temp1 * e
+        temp_phi = e
+        e = temp2
+        
+        x = x2- temp1* x1
+        y = d - temp1 * y1
+        
+        x2 = x1
+        x1 = x
+        d = y1
+        y1 = y
+    
+        if temp_phi == 1:
+            print(d+phi,"edrfghjkl")
+            return d + phi
+
+'''
+Tests to see if a number is prime.
+'''
+def is_prime(num):
+    if num == 2:
+        return True
+    if num < 2 or num % 2 == 0:
+        return False
+    for n in range(3, int(num**0.5)+2, 2):
+        if num % n == 0:
+            return False
+    return True
+
+def egcd(e,r):
+    while(r!=0):
+        e,r=r,e%r
+    return e
+def eugcd(e,r):
+    for i in range(1,r):
+        while(e!=0):
+            a,b=r//e,r%e
+            if(b!=0):
+                print("%d = %d*(%d) + %d"%(r,a,e,b))
+            r=e
+            e=b
+    return e,r
+def eea(a,b):
+    if(a%b==0):
+        return(b,0,1)
+    else:
+        gcd,s,t = eea(b,a%b)
+        s = s-((a//b) * t)
+        print("%d = %d*(%d) + (%d)*(%d)"%(gcd,a,t,s,b))
+        return(gcd,t,s)
+ 
+#Multiplicative Inverse
+def mult_inv(e,r):
+    gcd,s,_=eea(e,r)
+    if(gcd!=1):
+        return None
+    else:
+        if(s<0):
+            print("s=%d. Since %d is less than 0, s = s(modr), i.e., s=%d."%(s,s,s%r))
+        elif(s>0):
+            print("s=%d."%(s))
+        return s%r
+def generate_keypair(p, q):
+    if not (is_prime(p) and is_prime(q)):
+        raise ValueError('Both numbers must be prime.')
+    elif p == q:
+        raise ValueError('p and q cannot be equal')
+    #n = pq
+    n = p * q
+
+    #Phi is the totient of n
+    phi = (p-1) * (q-1)
+
+    #Choose an integer e such that e and phi(n) are coprime
+    
+    for i in range(1,1000):
+      if(egcd(i,phi)==1):
+          e=i
+    e = random.randrange(1, phi)
+    #e,r = eugcd(e,phi)
+    #d = mult_inv(e,r)
+    #print("few",d)
+    #Use Euclid's Algorithm to verify that e and phi(n) are comprime
+    g = gcd(e, phi)
+    while g != 1:
+        e = random.randrange(1, phi)
+        g = gcd(e, phi)
+
+    #Use Extended Euclid's Algorithm to generate the private key
+    d = mult_inv(e, phi)
+    print(d)
+    #Return public and private keypair
+    #Public key is (e, n) and private key is (d, n)
+    return ((e, n), (d, n))
+
+def encrypt(pk, plaintext):
+    #Unpack the key into it's components
+    print(pk)
+    key, n = pk
+    #Convert each letter in the plaintext to numbers based on the character using a^b mod m
+    print(key)
+    cipher = [(ord(char) ** key) % n for char in plaintext]
+    #Return the array of bytes
+    return cipher
+
+def decrypt(pk, ciphertext):
+    #Unpack the key into its components
+    key, n = pk
+    print(type(key),type(n))
+    #Generate the plaintext based on the ciphertext and key using a^b mod m
+    plain = [chr((char ** key) % n) for char in ciphertext]
+    #Return the array of bytes as a string
+    return ''.join(plain)
+
+@app.route('/getEncrypt',methods = ['GET'])
+def getEncrypt():
+  data = dict(request.args)
+  print(data)
+  msg = data['msg']
+  public, private = generate_keypair(17, 19)
+  encrypted_msg = encrypt(private, msg)
+  encrypted_msg = ''.join(map(lambda x: str(x), encrypted_msg))
+  encrypted_msg = "Encrypted msg is "+encrypted_msg + " and key is "+str(private)
+  print(encrypted_msg)
+  return jsonify({'result':encrypted_msg})
+
+@app.route('/getDecrypt',methods = ['GET'])
+def getDecrypt():
+  data = dict(request.args)
+  #print('------>',public)
+  msg = data['msg']
+  key = data['key']
+  key = key.split(',')
+  key = [int(x) for x in key]
+  key = tuple(key)
+  print(key)
+  decrypted_msg = decrypt(key, msg)
+  return jsonify({'result':decrypted_msg})
 
 if __name__ == '__main__':
 	app.run(debug = True)
