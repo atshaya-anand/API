@@ -17,36 +17,27 @@ app.get('/getDateDiff/:date1/:date2',async (req, res, next)=>{
     }
 });
 
-app.get('/getSetUnion',async (req, res, next)=>{
+app.get('/getSetUnion/:set1/:set2',async (req, res, next)=>{
     try{
-        res.send(await getSetUnion());
+        res.send(await getSetUnion(req.params.set1,req.params.set2));
     }
     catch(err){
         next(err);
     }
 });
 
-app.get('/getSetIntersection',async (req, res, next)=>{
+app.get('/getSetIntersection/:set1/:set2',async (req, res, next)=>{
     try{
-        res.send(await getSetIntersection());
+        res.send(await getSetIntersection(req.params.set1,req.params.set2));
     }
     catch(err){
         next(err);
     }
 });
 
-app.get('/getSetDiff',async (req, res, next)=>{
+app.get('/getSetDiff/:set1/:set2',async (req, res, next)=>{
     try{
-        res.send(await getSetDiff());
-    }
-    catch(err){
-        next(err);
-    }
-});
-
-app.get('/getWord',async (req, res, next)=>{
-    try{
-        res.send(await getSetDiff());
+        res.send(await getSetDiff(req.params.set1,req.params.set2));
     }
     catch(err){
         next(err);

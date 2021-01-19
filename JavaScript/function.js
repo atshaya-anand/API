@@ -113,9 +113,16 @@ function dateDiff(date1, date2) {
     return result; 
 }
 
-const getSetUnion = async () => {
-    var seta = [1, 2, 3, 4, 5, 6];
-    var setb = [3, 4, 11, 20];
+const getSetUnion = async (seta, setb) => {
+    console.log(seta,'----',setb);
+    seta = seta.split(',');
+    setb = setb.split(',');
+    for(var i=0;i<seta.length;i++){
+        seta[i] = parseInt(seta[i]);
+    }
+    for(var i=0;i<setb.length;i++){
+        setb[i] = parseInt(setb[i]);
+    }
     var result = [];
     for (var i = 0; i < seta.length; i++) {
         result.push(seta[i]);
@@ -129,9 +136,16 @@ const getSetUnion = async () => {
     return result;
 }
 
-const getSetIntersection = async () => {
-    var seta = [1, 2, 3, 4, 5, 6];
-    var setb = [3, 4, 11, 20];
+const getSetIntersection = async (seta, setb) => {
+    console.log(seta,'----',setb);
+    seta = seta.split(',');
+    setb = setb.split(',');
+    for(var i=0;i<seta.length;i++){
+        seta[i] = parseInt(seta[i]);
+    }
+    for(var i=0;i<setb.length;i++){
+        setb[i] = parseInt(setb[i]);
+    }
     var result = [];
     for (var i = 0; i < seta.length; i++) {
         if(setb.indexOf(seta[i]) != -1){
@@ -141,34 +155,29 @@ const getSetIntersection = async () => {
     return result;
 }
 
-const getSetDiff = async () => {
-    var seta = [1, 2, 3, 4, 5, 6];
-    var setb = [3, 4, 11, 20];
+const getSetDiff = async (seta, setb) => {
+    console.log(seta,'----',setb);
+    seta = seta.split(',');
+    setb = setb.split(',');
+    for(var i=0;i<seta.length;i++){
+        seta[i] = parseInt(seta[i]);
+    }
+    for(var i=0;i<setb.length;i++){
+        setb[i] = parseInt(setb[i]);
+    }
     var result = [];
     for (var i = 0; i < seta.length; i++) {
         //console.log(setb.indexOf(seta[i]),seta[i],"check");
         if(setb.indexOf(seta[i]) == -1){
             console.log(seta[i]);
-            continue;
-        }else{
             result.push(seta[i]);
         }
     }
     return result;
 }
 
-const getWord = async()=>{
-    ones = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine']
-
-    twos = ['Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen']
-
-    tens = ['Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety', 'Hundred']
-
-    suffixes = ['', 'Thousand', 'Million', 'Billion']
-}
-
 module.exports = { dateDiff,
                    getSetUnion,
                    getSetIntersection,
-                   getSetDiff,
-                   getWord };
+                   getSetDiff
+                 };
