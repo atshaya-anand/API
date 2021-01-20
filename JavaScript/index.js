@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const {getSetUnion, getSetIntersection, getSetDiff, dateDiff} = require('./function.js');
+const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose} = require('./function.js');
 
 app.get('/getDateDiff/:date1/:date2',async (req, res, next)=>{
     try{
@@ -38,6 +38,15 @@ app.get('/getSetIntersection/:set1/:set2',async (req, res, next)=>{
 app.get('/getSetDiff/:set1/:set2',async (req, res, next)=>{
     try{
         res.send(await getSetDiff(req.params.set1,req.params.set2));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getmatTranspose/:row/:col/:mat',async (req, res, next)=>{
+    try{
+        res.send(await getMatTranspose(req.params.row,req.params.col,req.params.mat));
     }
     catch(err){
         next(err);

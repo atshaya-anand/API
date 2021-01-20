@@ -176,8 +176,39 @@ const getSetDiff = async (seta, setb) => {
     return result;
 }
 
+const getMatTranspose = async (row, col, mat) => {
+    console.log(row,'------',col,'------',mat);
+    rows = parseInt(row);
+    col = parseInt(col);
+    var strnL = mat.split(",");
+    var count = 0;
+    var matrixA = [];
+    
+    for(var i=0;i<row;i++){
+        var temp = [];
+        for(var j=0;j<row;j++){
+            temp.push(parseInt(strnL[count]));
+            count = count+1;
+        }
+        matrixA.push(temp);
+    }
+    console.log(row,'----',col,'----',matrixA);
+    
+    var res = ''; 
+    for(var i=0;i<row;i++){
+        for(var j=0;j<col;j++){
+            console.log(matrixA[i][j]);
+            res = res + matrixA[i][j] + ' ';
+        }
+        res = res + '<br/>';
+    }
+    console.log(res);
+    return res;
+}
+
 module.exports = { dateDiff,
                    getSetUnion,
                    getSetIntersection,
-                   getSetDiff
+                   getSetDiff,
+                   getMatTranspose
                  };
