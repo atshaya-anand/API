@@ -18,3 +18,5 @@ The REST API server is coded using Python in Flask and JavaScript in Node.js.
 * Run the app.py file - python app.py
 ### JavaScript
 * Install Node.js 
+* Download and install dependencies - express
+* Run the index.js file - node index.js
