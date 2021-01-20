@@ -206,9 +206,83 @@ const getMatTranspose = async (row, col, mat) => {
     return res;
 }
 
+const getLowerDiagonal = async (row, col, mat) => {
+    console.log(row,'------',col,'------',mat);
+    rows = parseInt(row);
+    col = parseInt(col);
+    var strnL = mat.split(",");
+    var count = 0;
+    var matrixA = [];
+    
+    for(var i=0;i<row;i++){
+        var temp = [];
+        for(var j=0;j<row;j++){
+            temp.push(parseInt(strnL[count]));
+            count = count+1;
+        }
+        matrixA.push(temp);
+    }
+    console.log(row,'----',col,'----',matrixA);
+    
+    var lower_left = [];
+    var lower_right = [];
+    if(row == col){
+        for(var i=0;i<row;i++){
+            for(var j=0;j<col;j++){
+                if(j<i)
+                    lower_left.push(matrixA[i][j]);
+                if(j>=1 && i+j > col-1)
+                    lower_right.push(matrixA[i][j]);
+            }
+        }
+    }
+    
+    console.log("Left-lower:",lower_left,"\nRight-lower:",lower_right);
+    res = "Lower Left Elements: "+lower_left+"<br/>Lower Right Elements: "+lower_right;
+    return res;
+}
+
+const getUpperDiagonal = async (row, col, mat) => {
+    console.log(row,'------',col,'------',mat);
+    rows = parseInt(row);
+    col = parseInt(col);
+    var strnL = mat.split(",");
+    var count = 0;
+    var matrixA = [];
+    
+    for(var i=0;i<row;i++){
+        var temp = [];
+        for(var j=0;j<row;j++){
+            temp.push(parseInt(strnL[count]));
+            count = count+1;
+        }
+        matrixA.push(temp);
+    }
+    console.log(row,'----',col,'----',matrixA);
+    
+    var upper_left = [];
+    var upper_right = [];
+    if(row == col){
+        for(var i=0;i<row;i++){
+            for(var j=0;j<col;j++){
+                if(j>i)
+                    upper_right.push(matrixA[i][j]);
+                if(j<=1 && i+j < col-1)
+                    upper_left.push(matrixA[i][j]);
+            }
+        }
+    }
+    
+    console.log("Left-upper:",upper_left,"\nRight-upper:",upper_right);
+    res = "Upper Left Elements: "+upper_left+"<br/>Upper Right Elements: "+upper_right;
+    return res;
+}
+
 module.exports = { dateDiff,
                    getSetUnion,
                    getSetIntersection,
                    getSetDiff,
-                   getMatTranspose
+                   getMatTranspose,
+                   getLowerDiagonal,
+                   getUpperDiagonal
                  };
