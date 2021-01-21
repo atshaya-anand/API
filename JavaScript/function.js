@@ -278,11 +278,92 @@ const getUpperDiagonal = async (row, col, mat) => {
     return res;
 }
 
+ones = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine']
+
+twos = ['Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen']
+
+tens = ['Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety', 'Hundred']
+
+suffixes = ['', 'Thousand', 'Million', 'Billion']
+
+function process(number, index){
+    if (number=='0'){
+        return 'Zero';
+    }
+    
+    var length = number.length;
+    
+    if(length > 3){
+        return false;
+    }
+    
+    number = number.padStart(3, '0');//zfill(3);
+    var words = '';
+ 
+    var hdigit = parseInt(number[0]);
+    var tdigit = parseInt(number[1]);
+    var odigit = parseInt(number[2]);
+    
+    words += number[0] == '0'?'':ones[hdigit];
+    words += !(words == '')?' Hundred ': '';
+    
+    if(tdigit > 1){
+        words += tens[tdigit - 2];
+        words += ' ';
+        words += ones[odigit];
+    }
+    else if(tdigit == 1){
+        words += twos[(parseInt(tdigit + odigit) % 10) - 1];
+    }    
+    else if(tdigit == 0){
+        words += ones[odigit];
+    }
+    if(words.endsWith('Zero')){
+        words = words.slice(0,-4);
+    }
+    else{
+        words += ' ';
+    }
+    if(!((words.length) == 0)){    
+        words += suffixes[index];
+    }    
+    return words
+}
+const getWord = async(number)=>{
+    //number = "87600";
+    var length = String(number).length;
+    if (length>12){
+        return 'This program supports upto 12 digit numbers.'
+    }
+    var count = parseInt((length % 3 == 0)?length / 3:length / 3 + 1);
+    var copy = count;
+    var words = [];
+    console.log(count);
+    for(var i=length-1;i>-1;){
+         console.log(((i - 2 < 0)? 0 : i - 2),(i + 1),(copy - count))
+         words.push(process(String(number).slice(((i - 2 < 0)? 0 : i - 2), (i + 1)), (copy - count)));
+         count -= 1;
+         i=i-3;
+    }
+    var final_words = '';
+    var temp = "";
+    var rev_words = words.reverse();
+    for(var i=0;i<rev_words.length;i++){
+        temp = rev_words[i] + " ";
+        final_words += temp;
+    }
+
+    return final_words;
+}
+
+
+
 module.exports = { dateDiff,
                    getSetUnion,
                    getSetIntersection,
                    getSetDiff,
                    getMatTranspose,
                    getLowerDiagonal,
-                   getUpperDiagonal
+                   getUpperDiagonal,
+                   getWord
                  };

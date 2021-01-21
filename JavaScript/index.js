@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal} = require('./function.js');
+const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal,getWord} = require('./function.js');
 
 app.get('/getDateDiff/:date1/:date2',async (req, res, next)=>{
     try{
@@ -71,4 +71,12 @@ app.get('/getUpperDiagonal/:row/:col/:mat',async (req, res, next)=>{
     }
 });
 
+app.get('/getWord/:number',async (req, res, next)=>{
+    try{
+        res.send(await getWord(req.params.number));
+    }
+    catch(err){
+        next(err);
+    }
+});
 app.listen(8000,()=>console.log('Connected on PORT 8000'));
