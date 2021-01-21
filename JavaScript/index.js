@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal,getWord,getCheckSum} = require('./function.js');
+const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal,getWord,getCheckSum,generateOTPAlphaNum,generateOTPNum,generateOTPAlpha} = require('./function.js');
 
 app.get('/getDateDiff/:date1/:date2',async (req, res, next)=>{
     try{
@@ -82,7 +82,38 @@ app.get('/getWord/:number',async (req, res, next)=>{
 
 app.get('/getCheckSum/:string',async (req, res, next)=>{
     try{
+        //console.log(req.query,"dw");
         res.send(await getCheckSum(req.params.string));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/generateOTPAlphaNum/:size',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await generateOTPAlphaNum(req.params.size));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/generateOTPAlpha/:size',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await generateOTPAlpha(req.params.size));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/generateOTPNum/:size',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await generateOTPNum(req.params.size));
     }
     catch(err){
         next(err);

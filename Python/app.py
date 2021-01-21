@@ -2,6 +2,9 @@ from flask import Flask,request,jsonify
 from flask_cors import CORS
 import random
 from utils import *
+import math 
+import numpy as np
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -548,7 +551,69 @@ def getCheckSum():
   data = dict(request.args)
   text = data["text"]
   return jsonify({'result':md5sum(str.encode(text))})
+  
+val={}
+val["seed"] = time.perf_counter()
+def rnd():
+  val["seed"] = ( val["seed"]*9301+49297 ) % 233280; 
+  return val["seed"]/ (233280.0)
+def rand(number):
+    return math.ceil( rnd () * number )
 
+def generateOTPAlphaNum(OtpSize) : 
+  
+    # Declare a string variable   
+    # which stores all string  
+    string1 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    OTP = "" 
+    length = len(string1) 
+    for i in range(OtpSize) : 
+        OTP += string1[math.floor(rand(length))-1] 
+  
+    return OTP 
+
+def generateOTPAlpha(OtpSize) : 
+  
+    # Declare a string variable   
+    # which stores all string  
+    string1 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    OTP = "" 
+    length = len(string1) 
+    for i in range(OtpSize) : 
+        OTP += string1[math.floor(rand(length))-1]  
+  
+    return OTP 
+
+def generateOTPNum(OtpSize) : 
+  
+    # Declare a string variable   
+    # which stores all string  
+    string1 = '0123456789'
+    OTP = "" 
+    length = len(string1) 
+    for i in range(OtpSize) : 
+        OTP += string1[math.floor(rand(length))-1]  
+  
+    return OTP 
+
+
+@app.route('/generateOTPAlphaNum',methods = ['GET'])
+def generateOTPAlphaNumRoute():
+  data = dict(request.args)
+  OtpSize = int(data["text"])
+  return jsonify({'result':generateOTPAlphaNum(OtpSize)})
+
+@app.route('/generateOTPNum',methods = ['GET'])
+def generateOTPNumRoute():
+  data = dict(request.args)
+  OtpSize = int(data["text"])
+  return jsonify({'result':generateOTPNum(OtpSize)})
+
+@app.route('/generateOTPAlpha',methods = ['GET'])
+def generateOTPAlphaRoute():
+  data = dict(request.args)
+  OtpSize = int(data["text"])
+  return jsonify({'result':generateOTPAlpha(OtpSize)})
 
 if __name__ == '__main__':
 	app.run(debug = True)

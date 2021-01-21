@@ -124,3 +124,21 @@ function getCheckSum(){
   var url = "http://127.0.0.1:5000/getCheckSum?text="+text;
   ajaxCall(url,"Checksum Value");
 }
+
+function generateOTPAlphaNum(){
+  var text = document.getElementById('OtpText').value;
+  var url = "http://127.0.0.1:5000/generateOTPAlphaNum?text="+text;
+  ajaxCall(url,"OTP AlphaNumeric ");
+}
+
+function generateOTPNum(){
+  var text = document.getElementById('OtpText').value;
+  var url = "http://127.0.0.1:5000/generateOTPNum?text="+text;
+  ajaxCall(url,"OTP Numeric ");
+}
+
+function generateOTPAlpha(){
+  var text = document.getElementById('OtpText').value;
+  var url = "http://127.0.0.1:5000/generateOTPAlpha?text="+text;
+  ajaxCall(url,"OTP Alpha ");
+}

@@ -359,9 +359,48 @@ const getWord = async(number)=>{
 }
 
 const getCheckSum = async(str)=>{
-    //number = "87600"
 
     return MD5(str);
+}
+rnd.today = new Date(); 
+rnd.seed = rnd.today.getTime(); 
+function rnd() { 
+    rnd.seed = ( rnd.seed*9301+49297 ) % 233280; 
+    return rnd.seed/ (233280.0); 
+} ; 
+function rand( number ) { 
+    return Math.ceil( rnd () * number ); 
+};
+
+
+const generateOTPAlphaNum = async(size)=>{
+    var string1 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var OTP = "" ;
+    var length = string1.length;
+    for(var i=0;i<size;i++){
+        OTP+= string1[Math.floor(rand(length))-1];
+    }
+    return OTP;
+}
+
+const generateOTPAlpha = async(size)=>{
+    var string1 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var OTP = "" ;
+    var length = string1.length;
+    for(var i=0;i<size;i++){
+        OTP+= string1[Math.floor(rand(length))-1];
+    }
+    return OTP 
+}
+
+const generateOTPNum = async(size)=>{
+    var string1 = '0123456789';
+    var OTP = "" ;
+    var length = string1.length;
+    for(var i=0;i<size;i++){
+        OTP+= string1[Math.floor(rand(length))-1];
+    }
+    return OTP ;
 }
 
 module.exports = { dateDiff,
@@ -372,5 +411,8 @@ module.exports = { dateDiff,
                    getLowerDiagonal,
                    getUpperDiagonal,
                    getWord,
-                   getCheckSum
+                   getCheckSum,
+                   generateOTPAlphaNum,
+                   generateOTPNum,
+                   generateOTPAlpha
                  };
