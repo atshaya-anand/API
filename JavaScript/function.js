@@ -1,3 +1,5 @@
+const {MD5} = require('./md5.js');
+
 function dateDiff(date1, date2) {
     console.log(date1,'-------',date2);
     date1 = date1.split("T");
@@ -356,7 +358,11 @@ const getWord = async(number)=>{
     return final_words;
 }
 
+const getCheckSum = async(str)=>{
+    //number = "87600"
 
+    return MD5(str);
+}
 
 module.exports = { dateDiff,
                    getSetUnion,
@@ -365,5 +371,6 @@ module.exports = { dateDiff,
                    getMatTranspose,
                    getLowerDiagonal,
                    getUpperDiagonal,
-                   getWord
+                   getWord,
+                   getCheckSum
                  };
