@@ -3,7 +3,6 @@ from flask_cors import CORS
 import random
 from utils import *
 import math 
-import numpy as np
 import time
 
 app = Flask(__name__)
@@ -114,7 +113,7 @@ def getDifference():
               monthDiff-=1
           else :
               yearDiff-=1
-              monthDiff = 11;
+              monthDiff = 11
           
           dayDiff += daysInMonth[date_obj1.month]
   print(yearDiff , 'Y ' , monthDiff , 'M ' , dayDiff , 'D')
