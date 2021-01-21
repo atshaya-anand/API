@@ -8,6 +8,7 @@ This repository contains few examples for Application Programming Interface (API
 * Figure to Words in currency
 * RSA algorithm - (Encryption and Decryption)
 * Checksum value for a given word
+* Generation of One Time Password (OTP)
 
 ## REST API Server
 The REST API server is coded using Python in Flask web framework and JavaScript in Node.js with express framework.
