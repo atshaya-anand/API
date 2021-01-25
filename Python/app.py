@@ -19,6 +19,7 @@ class Date:
         self.minutes = mi
         self.seconds = s
 
+# FUNCTION TO CHECK WHETHER THE DATES ARE VALID
 def validate_date(date_obj):
   is_valid = 1
   is_leap = 0
@@ -50,7 +51,7 @@ def validate_date(date_obj):
   
   return is_valid,msg
 
-
+# API FOR FINDING DIFF B/W 2 GIVEN DATES
 @app.route('/getDateDiff',methods = ['GET'])
 def getDifference():
   data = dict(request.args)

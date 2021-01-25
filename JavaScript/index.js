@@ -6,6 +6,7 @@ app.use(express.json());
 app.use(cors());
 
 const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal,getWord,getCheckSum,generateOTPAlphaNum,generateOTPNum,generateOTPAlpha} = require('./function.js');
+const {getVariance, getStandardDeviation} = require('./set2-programs');
 
 app.get('/getDateDiff/:date1/:date2',async (req, res, next)=>{
     try{
@@ -119,4 +120,25 @@ app.get('/generateOTPNum/:size',async (req, res, next)=>{
         next(err);
     }
 });
+
+app.get('/getVariance/:data',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await getVariance(req.params.data));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getStandardDeviation/:data',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await getStandardDeviation(req.params.data));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
 app.listen(8000,()=>console.log('Connected on PORT 8000'));
