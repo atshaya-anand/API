@@ -201,6 +201,88 @@ const getLinearRegression = async (row,data) => {
     return result;
 }
 
+const computeGCD = async (num1, num2) => {
+    num1 = parseInt(num1);
+    num2 = parseInt(num2);
+    var temp;
+    while(num2){
+       temp = num1;
+       num1 = num2;
+       num2 = temp % num2;
+    }
+    var result = {};
+    result['result'] = num1;
+   return result;
+}
+
+const computeLcm = async (num1, num2) => {
+    num1 = parseInt(num1);
+    num2 = parseInt(num2);
+    var mul = num1 * num2;
+    var temp;
+    while(num2){
+       temp = num1;
+       num1 = num2;
+       num2 = temp % num2;
+    }
+    x = num1;
+    var lcm = mul/x;
+    var result = {};
+    result['result'] = lcm;
+    return result;
+}
+
+const sqrt = async (num) => {
+    num = parseInt(num);
+    var last_guess= num/2.0;
+    var guess;
+    while(true){
+        guess= (last_guess + num/last_guess)/2;
+        if(Math.abs(guess - last_guess) < .000001){
+            var result = {};
+            result['result'] = guess;
+            return result;
+        }
+        last_guess= guess;
+    }
+}
+
+const cubert = async (num) => {
+    num = parseInt(num);
+    var last_guess= num/3.0;
+    var guess;
+    while(true){
+        guess= (last_guess + num/last_guess)/3;
+        if(Math.abs(guess - last_guess) < .000001){
+            var result = {};
+            result['result'] = guess;
+            return result;
+        }
+        last_guess= guess;
+    }
+}
+
+const nthroot = async (n,num) => {
+    n = parseInt(n);
+    num = parseInt(num);
+    var x_0 = num / n;
+    var x_1 = 1;
+    while(true){
+        x0 = x_1;
+        x_1 = (1 / n)*((n - 1)*x_0 + (num / (x_0 ** (n - 1))))
+        if(x_0 == x_1){
+            var result = {};
+            result['result'] = x_1;
+            return result;
+        }
+    }
+}
+
 module.exports = { getVariance,
                    getStandardDeviation,
-                   getLinearRegression }
+                   getLinearRegression,
+                   computeGCD,
+                   computeLcm,
+                   sqrt,
+                   cubert,
+                   nthroot }

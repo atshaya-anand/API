@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(cors());
 
 const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal,getWord,getCheckSum,generateOTPAlphaNum,generateOTPNum,generateOTPAlpha} = require('./function.js');
-const {getVariance, getStandardDeviation, getLinearRegression} = require('./set2-programs');
+const {getVariance, getStandardDeviation, getLinearRegression, computeGCD, computeLcm, sqrt, cubert, nthroot} = require('./set2-programs');
 
 app.get('/getDateDiff/:date1/:date2',async (req, res, next)=>{
     try{
@@ -145,6 +145,56 @@ app.get('/getLinearRegression/:row/:data',async (req, res, next)=>{
     try{
         //console.log(req.query,"dw");
         res.send(await getLinearRegression(req.params.row,req.params.data));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getGCD/:num1/:num2',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await computeGCD(req.params.num1,req.params.num2));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getLCM/:num1/:num2',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await computeLcm(req.params.num1,req.params.num2));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getSquareRoot/:num',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await sqrt(req.params.num));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getCubeRoot/:num',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await cubert(req.params.num));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getnthRoot/:n/:num',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await nthroot(req.params.n,req.params.num));
     }
     catch(err){
         next(err);
