@@ -24,15 +24,21 @@ function moveNext(id1,id2){
 function getSD(){
     var data = document.getElementById('sd').value;
     console.log(data);
+    var url = "http://localhost:8000/getStandardDeviation/"+data;
+    ajaxCall(url,"Standard Deviation");
 }
 
 function getVariance(){
     var data = document.getElementById('var').value;
     console.log(data);
+    var url = "http://localhost:8000/getVariance/"+data;
+    ajaxCall(url,"Variance");
 }
 
 function getLR(){
     var row = document.getElementById('row').value;
     var data = document.getElementById('lr').value;
     console.log(row,data);
+    var url = "http://localhost:8000/getLinearRegression/"+row+"/"+data;
+    ajaxCall(url,"Linear Regression");
 }
