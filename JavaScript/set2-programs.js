@@ -73,14 +73,14 @@ function rmse_metric(actual, predicted){
     return Math.sqrt(mean_error);
 }
 
-function evaluate_algorithm(dataset){
+/*function evaluate_algorithm(dataset){
     var test_set = [];
     for(var i=0;i<dataset.length;i++){
         var row_copy = dataset[i];
         row_copy[-1] = null;
         test_set.push(row_copy);
     }
-	var predicted = algorithm(dataset, test_set)
+	var predicted = simple_linear_regression(dataset, test_set);
     console.log('Predicted--->',predicted)
     var actual = [];
     for(var i=0;i<dataset.length;i++){
@@ -89,10 +89,16 @@ function evaluate_algorithm(dataset){
     }
 	var rmse = rmse_metric(actual, predicted)
     return rmse;
-}
+}*/
 
 function mean(values){
-    return Math.sum(values) / parseFloat(values.length);
+    var sum = 0;
+    for(var i=0;i<values.length;i++){
+        sum += values[i];
+    }
+    var res = parseFloat(sum / parseFloat(values.length)).toFixed(2);
+    console.log('-;;---',res);
+    return res;
 }
  
 function covariance(x, mean_x, y, mean_y){
@@ -108,10 +114,15 @@ function variance(values, mean){
     for(var i=0;i<values.length;i++){
         x[i] = (values[i]-mean)**2;
     }
-    return sum(x);
+    var sum = 0;
+    for(var i=0;i<x.length;i++){
+        sum += x[i];
+    }
+    return sum;
 }
  
 function coefficients(dataset){
+    console.log(dataset);
     var x = [];
     for(var i=0;i<dataset.length;i++){
         var row = dataset[i];
@@ -122,16 +133,24 @@ function coefficients(dataset){
         var row = dataset[i];
         y[i] = row[1];
     }
+    console.log(x,y);
     var x_mean = mean(x);
+    console.log(x_mean);
     var y_mean = mean(y);
-	var b1 = covariance(x, x_mean, y, y_mean) / variance(x, x_mean);
-	var b0 = y_mean - b1 * x_mean
+    console.log(y_mean);
+	var b1 = parseFloat(covariance(x, x_mean, y, y_mean) / variance(x, x_mean));
+    var b0 = parseFloat(y_mean - b1 * x_mean);
+    console.log(b0,b1);
     return [b0, b1];
 }
 
 function simple_linear_regression(train, test){
 	var predictions = [];
-    var b0, b1 = coefficients(train);
+    var b0, b1;
+    var res = coefficients(train);
+    b0 = res[0];
+    b1 = res[1];
+    console.log('b0---->',b0,'b1--->',b1);
     for(var i=0;i<test.length;i++){
         var row = test[i];
         var yhat = b0 + b1 * row[0];
@@ -140,21 +159,23 @@ function simple_linear_regression(train, test){
     return predictions;
 }
 
-function l(dataset,algorithm){
+function l(dataset){
+  var len = dataset.length, copy = new Array(len); // boost in Safari 
+  for (var i=0; i<len; ++i){
+    copy[i] = dataset[i].slice(0);
+  }
+  console.log('copy-->',copy);
   var test_set = [];
   for(var i=0;i<dataset.length;i++){
       var row = dataset[i];
       var row_copy = row;
-      row_copy[-1] = null;
+      row_copy[row.length-1] = null;
       test_set.push(row_copy);
   }
-  var predicted = simple_linear_regression(dataset,test_set);
-  var actual = [];
-  for(var i=0;i<dataset.length;i++){
-      var row = dataset[i];
-      actual[i] = row[-1];
-  }
-  return actual;
+  console.log('test-set--->',test_set);
+  var predicted = simple_linear_regression(copy,test_set);
+  console.log('predicted-->',predicted);
+  return predicted;
 }
 
 const getLinearRegression = async (row,data) => {
@@ -175,8 +196,9 @@ const getLinearRegression = async (row,data) => {
     console.log(row,'----',dataset);
     var result = {};
     
-    var rmse = evaluate_algorithm(dataset, simple_linear_regression);
-    console.log(l(dataset, simple_linear_regression));
+    //var rmse = evaluate_algorithm(dataset);
+    result['result'] = l(dataset);
+    return result;
 }
 
 module.exports = { getVariance,
