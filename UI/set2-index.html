@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>API-Examples</title>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+      body{
+        font-family: 'Josefin Sans', sans-serif;
+        background-color: #353942;
+        color:aliceblue;
+      }
+    </style>
+  </head>
+  <body>
+
+    
+    <div style="padding:50px;width: 60%; float:left; height:600px; ">
+      <h1>API-2nd Set Programs</h1><br/>
+
+      <div id="BSC" style="padding-left: 50px;">
+        <h3>5 - Basic Statistics Calculator </h3><br/>
+        <h5>Standard Deviation, Variance, Linear Regression</h5><br/>
+          <div class="form-group">
+            <label for="exampleInput1">Input for Standard Deviation</label>
+            <input type="text" class="form-control" id="sd" placeholder="Enter the data" style="width:40%;">
+          </div>
+          <div class="form-group">
+              <label for="exampleInput2">Input for Variance</label>
+              <input type="text" class="form-control" id="var" placeholder="Enter the data" style="width:40%;">
+         </div>
+         <div class="form-group">
+            <label for="exampleInput2">Input for Linear Regression</label>
+            <input type="text" class="form-control" id="row" placeholder="Enter no of x,y values" style="width:40%;">
+            <input type="text" class="form-control" id="lr" placeholder="Enter the x,y values" style="width:40%;">
+       </div>
+          <button class="btn btn-primary" onclick = "getSD()">Get Standard Deviation</button>
+          <button class="btn btn-primary" onclick = "getVariance()">Get Variance</button>
+          <button class="btn btn-primary" onclick = "getLR()">Get Linear Regression</button><br/<br/><br/>
+          
+      </div>
+
+
+      
+    </div>
+        
+    <div style="margin:70px;padding:30px;width: 30%; float:left; height:400px;border-style: solid;border-color:wheat; ">
+      <h1>Result</h3><br/><br/>
+        <h3 id="title"></h5>
+        <p id="resultValue"></p><br/>
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <script src="set2-logic.js"></script>
+    
+  </body>
+</html>
