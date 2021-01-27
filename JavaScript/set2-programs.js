@@ -247,21 +247,6 @@ const sqrt = async (num) => {
     }
 }
 
-const cubert = async (num) => {
-    num = parseInt(num);
-    var last_guess= num/3.0;
-    var guess;
-    while(true){
-        guess= (last_guess + num/last_guess)/3;
-        if(Math.abs(guess - last_guess) < .000001){
-            var result = {};
-            result['result'] = guess;
-            return result;
-        }
-        last_guess= guess;
-    }
-}
-
 const nthroot = async (n,num) => {
     n = parseInt(n);
     num = parseInt(num);
@@ -284,5 +269,4 @@ module.exports = { getVariance,
                    computeGCD,
                    computeLcm,
                    sqrt,
-                   cubert,
                    nthroot }

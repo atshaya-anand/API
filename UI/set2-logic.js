@@ -42,3 +42,28 @@ function getLR(){
     var url = "http://localhost:8000/getLinearRegression/"+row+"/"+data;
     ajaxCall(url,"Linear Regression");
 }
+
+function getGCD(){
+  var num1 = document.getElementById('num1').value;
+  var num2 = document.getElementById('num2').value;
+  console.log(num1,num2);
+  var url = "http://localhost:8000/getGCD/"+num1+"/"+num2;
+  ajaxCall(url,"GCD");
+}
+
+function getLCM(){
+  var num1 = document.getElementById('num1').value;
+  var num2 = document.getElementById('num2').value;
+  console.log(num1,num2);
+  var url = "http://localhost:8000/getLCM/"+num1+"/"+num2;
+  ajaxCall(url,"LCM");
+}
+
+function getnthRoot(){
+  var n = document.getElementById('n').value;
+  var num = document.getElementById('num').value;
+  console.log(n,num);
+  var url = "http://localhost:8000/getnthRoot/"+n+"/"+num;
+  var x = n + "th Root";
+  ajaxCall(url,x);
+}

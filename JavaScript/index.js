@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(cors());
 
 const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal,getWord,getCheckSum,generateOTPAlphaNum,generateOTPNum,generateOTPAlpha} = require('./function.js');
-const {getVariance, getStandardDeviation, getLinearRegression, computeGCD, computeLcm, sqrt, cubert, nthroot} = require('./set2-programs');
+const {getVariance, getStandardDeviation, getLinearRegression, computeGCD, computeLcm, sqrt, nthroot} = require('./set2-programs');
 
 app.get('/getDateDiff/:date1/:date2',async (req, res, next)=>{
     try{
@@ -175,16 +175,6 @@ app.get('/getSquareRoot/:num',async (req, res, next)=>{
     try{
         //console.log(req.query,"dw");
         res.send(await sqrt(req.params.num));
-    }
-    catch(err){
-        next(err);
-    }
-});
-
-app.get('/getCubeRoot/:num',async (req, res, next)=>{
-    try{
-        //console.log(req.query,"dw");
-        res.send(await cubert(req.params.num));
     }
     catch(err){
         next(err);

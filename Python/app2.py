@@ -7,28 +7,28 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route('/staticticStandardDeviation',methods = ['GET'])
+@app.route('/getStandardDeviation',methods = ['GET'])
 def staticticStandardDeviation():
     data = dict(request.args)
-    dataSet = data["dataSet"].split(",")
+    dataSet = data["data"].split(",")
     dataSet = [int(x) for x in dataSet]
     print(type(dataSet),dataSet)
     result = sd_calc(dataSet)
     return jsonify({'result':result})
 
-@app.route('/staticticVariance',methods = ['GET'])
+@app.route('/getVariance',methods = ['GET'])
 def staticticVariance():
     data = dict(request.args)
-    dataSet = data["dataSet"].split(",")
+    dataSet = data["data"].split(",")
     dataSet = [int(x) for x in dataSet]
     print(type(dataSet),dataSet)
     result = variance(dataSet)
     return jsonify({'result':result})
 
-@app.route('/staticticLinearRegression',methods = ['GET'])
+@app.route('/getLinearRegression',methods = ['GET'])
 def staticticLinearRegression():
     data = dict(request.args)
-    dataSet = data["dataSet"].split(",")
+    dataSet = data["data"].split(",")
     dataSet = [int(x) for x in dataSet]
     print(type(dataSet),dataSet)
     if len(dataSet)%2 !=0:
@@ -49,7 +49,7 @@ def staticticLinearRegression():
     result = linear_regression(matrix)
     return jsonify({'result':result})
 
-@app.route('/log2GCF',methods = ['GET'])
+@app.route('/getGCD',methods = ['GET'])
 def log2GCF():
     data = dict(request.args)
     num1 = int(data["num1"])
@@ -57,7 +57,7 @@ def log2GCF():
     result = computeGCD(num1,num2)
     return jsonify({'result':result})
 
-@app.route('/log2LCF',methods = ['GET'])
+@app.route('/getLCM',methods = ['GET'])
 def log2LCF():
     data = dict(request.args)
     num1 = int(data["num1"])
@@ -65,10 +65,10 @@ def log2LCF():
     result = computeLcm(num1,num2)
     return jsonify({'result':result})
 
-@app.route('/log2Root',methods = ['GET'])
+@app.route('/getnRoot',methods = ['GET'])
 def log2Root():
     data = dict(request.args)
-    root = int(data["root"])
+    root = int(data["n"])
     num = int(data["num"])
     result = nthroot(root,num)
     return jsonify({'result':result})
