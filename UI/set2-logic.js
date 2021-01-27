@@ -67,3 +67,26 @@ function getnthRoot(){
   var x = n + "th Root";
   ajaxCall(url,x);
 }
+
+function getln(){
+  var num = document.getElementById('num1').value;
+  console.log(num);
+  var url = "http://localhost:8001/getNaturalLog/"+num;
+  ajaxCall(url,"Natural Logarithm (ln)");
+}
+
+function getlog(){
+  var base = document.getElementById('base').value;
+  var num = document.getElementById('num2').value;
+  console.log(base,num);
+  var url = "http://localhost:8001/getLog/"+num+"/"+base;
+  ajaxCall(url,"Logarithm (log)");
+}
+
+function getantilog(){
+  var pow = document.getElementById('pow').value;
+  var num = document.getElementById('num').value;
+  console.log(pow,num);
+  var url = "http://localhost:8001/getAntiLog/"+num+"/"+pow;
+  ajaxCall(url,"Anti-Logarithm (exponential)");
+}

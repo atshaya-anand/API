@@ -221,4 +221,4 @@ app.get('/getAntiLog/:num/:pow',async (req, res, next)=>{
     }
 });
 
-app.listen(8000,()=>console.log('Connected on PORT 8000'));
+app.listen(8001,()=>console.log('Connected on PORT 8000'));

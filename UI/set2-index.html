@@ -27,9 +27,32 @@
     <div style="padding:50px;width: 60%; float:left; height:600px; ">
       <h1>API-2nd Set Programs</h1><br/>
 
-      <div id="log2" style="padding-left: 50px;">
+      <div id="log1" style="padding-left: 50px;">
+        <h3>2 - Math-Log1 Calculator </h3><br/>
+        <h5>Logarithm(log), Natural Logarithm (ln), Anti-logarithm</h5><br/>
+          <div class="form-group">
+            <label for="exampleInput1">Input for Natural Log</label>
+            <input type="text" class="form-control" id="num1" placeholder="Enter a number" style="width:40%;">
+          </div>
+          <div class="form-group">
+              <label for="exampleInput2">Input for Logarithm</label>
+              <input type="text" class="form-control" id="num2" placeholder="Enter a number" style="width:40%;">
+              <input type="text" class="form-control" id="base" placeholder="Enter the base" style="width:40%;">
+         </div>
+         <div class="form-group">
+          <label for="exampleInput2">Input for Anti-Logarithm</label>
+          <input type="text" class="form-control" id="num" placeholder="Enter a number" style="width:40%;">
+          <input type="text" class="form-control" id="pow" placeholder="Enter the power" style="width:40%;">
+        </div>
+          <button class="btn btn-primary" onclick = "getln()">Get ln</button>
+          <button class="btn btn-primary" onclick = "getlog()">Get log</button>
+          <button class="btn btn-primary" onclick = "getantilog()">Get anti-log</button><br/<br/><br/>
+          <button class="btn" onclick="moveNext('log1','log2')">Next Program!</button>
+      </div>
+
+      <div id="log2" style="padding-left: 50px;display: none;">
         <h3>3 - Math-Log2 Calculator </h3><br/>
-        <h5>(GCD, LCM, Squre-root, Cube-root and Nth-root</h5><br/>
+        <h5>GCD, LCM, Squre-root, Cube-root and Nth-root</h5><br/>
           <div class="form-group">
             <label for="exampleInput1">Input for GCF & LCM</label>
             <input type="text" class="form-control" id="num1" placeholder="Enter num1" style="width:40%;">
