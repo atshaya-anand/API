@@ -253,9 +253,11 @@ const nthroot = async (n,num) => {
     var x_0 = num / n;
     var x_1 = 1;
     while(true){
+        console.log('hey');
         x0 = x_1;
         x_1 = (1 / n)*((n - 1)*x_0 + (num / (x_0 ** (n - 1))))
         if(x_0 == x_1){
+            console.log('no');
             var result = {};
             result['result'] = x_1;
             return result;
@@ -263,10 +265,46 @@ const nthroot = async (n,num) => {
     }
 }
 
+const ln = async (x) => {
+    x = parseInt(x);
+    var n = 1000.0;
+    var result = {};
+    var output =  n * ((x ** (1/n)) - 1);
+    result['result'] = output;
+    return result;
+}
+
+const log = async (x, base) => {
+    x = parseInt(x);
+    base = parseInt(base);
+    var n = 1000.0;
+    var result = {};
+    var noutput =  n * ((x ** (1/n)) - 1);
+    var baseOutput = n * ((base ** (1/n)) - 1);
+    var op = noutput / baseOutput;
+    result['result'] = op;
+    return result;
+}
+
+const antiLog = async (a, b) => {
+    a = parseInt(a);
+    b = parseInt(b);
+    var c = 1;
+    for (var i = 1; i <= b; i++) {
+        c = c * a;
+    }
+    var result = {};
+    result['result'] = c;
+    return result;
+}   
+
 module.exports = { getVariance,
                    getStandardDeviation,
                    getLinearRegression,
                    computeGCD,
                    computeLcm,
                    sqrt,
-                   nthroot }
+                   nthroot,
+                   ln,
+                   log,
+                   antiLog }

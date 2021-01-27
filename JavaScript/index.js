@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(cors());
 
 const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal,getWord,getCheckSum,generateOTPAlphaNum,generateOTPNum,generateOTPAlpha} = require('./function.js');
-const {getVariance, getStandardDeviation, getLinearRegression, computeGCD, computeLcm, sqrt, nthroot} = require('./set2-programs');
+const {getVariance, getStandardDeviation, getLinearRegression, computeGCD, computeLcm, sqrt, nthroot, ln, log, antiLog} = require('./set2-programs');
 
 app.get('/getDateDiff/:date1/:date2',async (req, res, next)=>{
     try{
@@ -185,6 +185,36 @@ app.get('/getnthRoot/:n/:num',async (req, res, next)=>{
     try{
         //console.log(req.query,"dw");
         res.send(await nthroot(req.params.n,req.params.num));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getNaturalLog/:num',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await ln(req.params.num));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getLog/:num/:base',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await log(req.params.num,req.params.base));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getAntiLog/:num/:pow',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await antiLog(req.params.num,req.params.pow));
     }
     catch(err){
         next(err);
