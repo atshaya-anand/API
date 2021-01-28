@@ -1,8 +1,10 @@
 from flask import Flask,request,jsonify
 from flask_cors import CORS
 from statistics import *
-from log2Calculator import *
 from log1Calculator import *
+from log2Calculator import *
+from log3Calculator import *
+import math
 
 app = Flask(__name__)
 CORS(app)
@@ -95,6 +97,78 @@ def log2AntiLog():
     num = int(data["num"])
     base = int(data["base"])
     result = antiLog(num,base)
+    return jsonify({'result':result})
+
+@app.route('/getSine',methods = ['GET'])
+def getSine():
+    data = dict(request.args)
+    num = int(data["num"])
+    result = sine(num)
+    return jsonify({'result':result})
+
+@app.route('/getCosine',methods = ['GET'])
+def getCosine():
+    data = dict(request.args)
+    num = int(data["num"])
+    result = cosine(num)
+    return jsonify({'result':result})
+
+@app.route('/getTan',methods = ['GET'])
+def getTan():
+    data = dict(request.args)
+    num = int(data["num"])
+    result = tan(num)
+    return jsonify({'result':result})
+
+@app.route('/getCosec',methods = ['GET'])
+def getCosec():
+    data = dict(request.args)
+    num = int(data["num"])
+    result = sine(num)
+    result = 1/result
+    return jsonify({'result':result})
+
+@app.route('/getSec',methods = ['GET'])
+def getSec():
+    data = dict(request.args)
+    num = int(data["num"])
+    result = cosine(num)
+    result = 1/result
+    return jsonify({'result':result})
+
+@app.route('/getCot',methods = ['GET'])
+def getCot():
+    data = dict(request.args)
+    num = int(data["num"])
+    result = tan(num)
+    result = 1/result
+    return jsonify({'result':result}) 
+
+@app.route('/getArcSin',methods = ['GET'])
+def getArcSin():
+    data = dict(request.args)
+    num = float(data["num"])
+    result = arcSin(num)
+    return jsonify({'result':result})
+
+@app.route('/getArcCos',methods = ['GET'])
+def getArcCos():
+    data = dict(request.args)
+    num = float(data["num"])
+    if num>1 or num < -1:
+        result = "Enter number in range of -1 to 1"
+    else:
+        result = math.acos(num)
+    return jsonify({'result':result})
+
+@app.route('/getArcTan',methods = ['GET'])
+def getArcTan():
+    data = dict(request.args)
+    num = float(data["num"])
+    if num>1 or num < -1:
+        result = "Enter number in range of -1 to 1"
+    else:
+        result = math.atan(num)
     return jsonify({'result':result})
 
 if __name__ == '__main__':
