@@ -140,7 +140,7 @@ def getSec():
 def getCot():
     data = dict(request.args)
     num = int(data["num"])
-    result = tan(num)
+    result = float(tan(num))
     result = 1/result
     return jsonify({'result':result}) 
 

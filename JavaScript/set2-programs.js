@@ -296,6 +296,131 @@ const antiLog = async (a, b) => {
     return result;
 }   
 
+var PI=3.1415926535897932384650288
+var TERMS = 7
+
+function fact(n) {
+    return  n<= 0? 1: n * fact(n-1);
+}
+
+function power(base,exp) {
+    if(exp < 0){
+        if(base == 0){
+            return -0; // Error!!
+        }
+        return 1 / (base * power(base, (-exp) - 1))
+    }
+    if(exp == 0)
+        return 1
+    if(exp == 1)
+        return base
+    return base * power(base, exp - 1)
+}
+
+function sine(deg,state=0){ 
+    var deg = deg % 360 // make it less than 360
+    var rad = deg * PI / 180
+    var sin = 0
+    var i=0
+    for(i=0;i<TERMS;i++){ // That's Taylor series!!
+        sin = sin + power(-1, i) * power(rad, 2 * i + 1) / fact(2 * i + 1)
+    }
+    var result = {};
+    result['result'] = sin;
+    if(state==1){
+      result['result'] = 1/result['result'];  
+    }
+    return result
+
+}
+
+function cosine(deg,state=0) {
+    var deg = deg % 360 // make it less than 360
+    var rad = deg * PI / 180
+    var cos = 0
+    var i=0
+    for(i=0;i<TERMS;i++){ // That's also Taylor series!!
+        cos += power(-1, i) * power(rad, 2 * i) / fact(2 * i)
+    }
+    var result = {};
+    result['result'] = cos;
+    if(state==1){
+      result['result'] = 1/result['result'];  
+    }
+    return result
+}
+
+function fac(num){
+    if (num == 0)
+        return 1; 
+  
+    // To store factorial of a number 
+    var fact = 1; 
+    for(var i=1;i<=num;i++){ //i in range(1, num + 1): 
+        fact = fact * i; 
+    }
+    // Return the factorial of a number 
+    return fact; 
+ } 
+// Function to find tan(x) upto n terms 
+function tan(x,state=1){
+  
+    // To store value of the expansion 
+    var sum = 0
+    var terms = 6
+    var x = x % 360; // make it less than 360
+    x = x * PI / 180
+    for(var i=1;i<=terms;i++){// i in range(1, terms + 1): 
+  
+        // This loops here calculate Bernoulli number 
+        // which is further used to get the coefficient 
+        // in the expansion of tan x 
+        var B = 0; 
+        var Bn = 2 * i; 
+        for(var k=0;k<=Bn;k++){// k in range(Bn + 1): 
+            var temp = 0; 
+            for(var r=0;r<=k;r++){// r in range(0, k + 1): 
+                temp = temp + Math.pow(-1, r) * fac(k) * Math.pow(r, Bn) / (fac(r) * fac(k - r)); 
+            }  
+            B = B + temp / ((k + 1)); 
+        } 
+        sum = sum + Math.pow(-4, i) * (1 - Math.pow(4, i)) * B * Math.pow(x, 2 * i - 1) / fac(2 * i); 
+    }
+    // Print the value of expansion 
+    var result = {};
+    result['result'] = sum.toPrecision(9);
+    if(state==1){
+      result['result'] = 1/result['result'];  
+    }
+    return result;
+}
+
+function arcSin(x){ 
+    var n = 8
+    var Sum = parseFloat(x)
+    var e = 2
+    var o = 1
+    var p = 1
+    for(var i=2;i<=n;i++){// i in range(2, n + 1): 
+  
+        // The power to which 'x' is raised 
+        p += 2
+  
+        Sum += (o / e) * (Math.pow(x, p) / p) 
+  
+        // Numerator value 
+        o = o * (o + 2) 
+  
+        // Denominator value 
+        e = e * (e + 2) 
+        
+    }
+    console.log(Sum);
+    var result = {};
+    result['result'] = Sum.toPrecision(9);
+    return result; 
+}
+
 module.exports = { getVariance,
                    getStandardDeviation,
                    getLinearRegression,
@@ -305,4 +430,8 @@ module.exports = { getVariance,
                    nthroot,
                    ln,
                    log,
-                   antiLog }
+                   antiLog,
+                   sine,
+                   cosine,
+                   tan,
+                   arcSin }

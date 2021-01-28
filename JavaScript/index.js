@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(cors());
 
 const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal,getWord,getCheckSum,generateOTPAlphaNum,generateOTPNum,generateOTPAlpha} = require('./function.js');
-const {getVariance, getStandardDeviation, getLinearRegression, computeGCD, computeLcm, sqrt, nthroot, ln, log, antiLog} = require('./set2-programs');
+const {getVariance, getStandardDeviation, getLinearRegression, computeGCD, computeLcm, sqrt, nthroot, ln, log, antiLog,sine,cosine,tan,arcSin} = require('./set2-programs');
 
 app.get('/getDateDiff/:date1/:date2',async (req, res, next)=>{
     try{
@@ -215,6 +215,112 @@ app.get('/getAntiLog/:num/:pow',async (req, res, next)=>{
     try{
         //console.log(req.query,"dw");
         res.send(await antiLog(req.params.num,req.params.pow));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getSine/:num/',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await sine(req.params.num));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getCosine/:num/',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await cosine(req.params.num));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getTan/:num/',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await tan(req.params.num));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getArcSin/:num/',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await arcSin(req.params.num));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getArcCos/:num/',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        var num = parseFloat(req.params.num);
+        if( num>1 || num < -1){
+            var result = "Enter number in range of -1 to 1";
+            res.send({"result":result});
+        }
+        else{
+            var result = Math.acos(num)
+            res.send({"result":result});
+        }
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getArcTan/:num/',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        var num = parseFloat(req.params.num);
+        if( num>1 || num < -1){
+            var result = "Enter number in range of -1 to 1";
+            res.send({"result":result});
+        }
+        else{
+            var result = Math.atan(num)
+            res.send({"result":result});
+        }
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getCosec/:num/',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await sine(req.params.num,1));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getSec/:num/',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await cosine(req.params.num,1));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/getCot/:num/',async (req, res, next)=>{
+    try{
+        //console.log(req.query,"dw");
+        res.send(await tan(req.params.num,1));
     }
     catch(err){
         next(err);

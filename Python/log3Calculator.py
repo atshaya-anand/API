@@ -75,7 +75,7 @@ def tan(x):
                 temp = temp + pow(-1, r) * fac(k) * pow(r, Bn) / (fac(r) * fac(k - r)); 
   
             B = B + temp / ((k + 1)); 
-  
+
         sum = sum + pow(-4, i) * (1 - pow(4, i)) * B * pow(x, 2 * i - 1) / fac(2 * i); 
   
     # Print the value of expansion 
