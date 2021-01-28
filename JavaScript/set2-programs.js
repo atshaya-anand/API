@@ -253,11 +253,9 @@ const nthroot = async (n,num) => {
     var x_0 = num / n;
     var x_1 = 1;
     while(true){
-        console.log('hey');
         x_0 = x_1;
         x_1 = (1 / n)*((n - 1)*x_0 + (num / (x_0 ** (n - 1))));
         if(x_0 == x_1){
-            console.log('no');
             var result = {};
             result['result'] = x_1;
             return result;

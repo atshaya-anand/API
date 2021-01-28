@@ -15,7 +15,6 @@ def nthroot (n, A):
     while True:
         #step 2:
         x_0, x_1 = x_1, (1 / n)*((n - 1)*x_0 + (A / (x_0 ** (n - 1))))
-        print(x_0,x_1)
         x_0 = float("{0:.14f}".format(x_0))
         x_1 = float("{0:.14f}".format(x_1))
         if x_0 == x_1:
