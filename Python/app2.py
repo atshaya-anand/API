@@ -2,6 +2,7 @@ from flask import Flask,request,jsonify
 from flask_cors import CORS
 from statistics import *
 from log2Calculator import *
+from log1Calculator import *
 
 app = Flask(__name__)
 CORS(app)
@@ -71,6 +72,29 @@ def log2Root():
     root = int(data["n"])
     num = int(data["num"])
     result = nthroot(root,num)
+    return jsonify({'result':result})
+
+@app.route('/getNaturalLog',methods = ['GET'])
+def log2Natural():
+    data = dict(request.args)
+    num = int(data["num"])
+    result = ln(num)
+    return jsonify({'result':result})
+
+@app.route('/getLog',methods = ['GET'])
+def log2Log():
+    data = dict(request.args)
+    num = int(data["num"])
+    base = int(data["base"])
+    result = log(num,base)
+    return jsonify({'result':result})
+
+@app.route('/getAntiLog',methods = ['GET'])
+def log2AntiLog():
+    data = dict(request.args)
+    num = int(data["num"])
+    base = int(data["base"])
+    result = antiLog(num,base)
     return jsonify({'result':result})
 
 if __name__ == '__main__':
