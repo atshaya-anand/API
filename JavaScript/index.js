@@ -183,7 +183,7 @@ app.get('/getSquareRoot/:num',async (req, res, next)=>{
 
 app.get('/getnthRoot/:n/:num',async (req, res, next)=>{
     try{
-        //console.log(req.query,"dw");
+        console.log("dw");
         res.send(await nthroot(req.params.n,req.params.num));
     }
     catch(err){
