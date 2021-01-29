@@ -90,3 +90,66 @@ function getantilog(){
   var url = "http://localhost:8001/getAntiLog/"+num+"/"+pow;
   ajaxCall(url,"Anti-Logarithm (exponential)");
 }
+
+function getSin(){
+  var num = document.getElementById('ip').value;
+  console.log(num);
+  var url = "http://localhost:8001/getSine/"+num;
+  ajaxCall(url,"Sin "+num);
+}
+
+function getCos(){
+  var num = document.getElementById('ip').value;
+  console.log(num);
+  var url = "http://localhost:8001/getCosine/"+num;
+  ajaxCall(url,"Cos "+num);
+}
+
+function getTan(){
+  var num = document.getElementById('ip').value;
+  console.log(num);
+  var url = "http://localhost:8001/getTan/"+num;
+  ajaxCall(url,"Tan "+num);
+}
+
+function getSec(){
+  var num = document.getElementById('ip').value;
+  console.log(num);
+  var url = "http://localhost:8001/getSec/"+num;
+  ajaxCall(url,"Sec "+num);
+}
+
+function getCosec(){
+  var num = document.getElementById('ip').value;
+  console.log(num);
+  var url = "http://localhost:8001/getCosec/"+num;
+  ajaxCall(url,"Cosec "+num);
+}
+
+function getCot(){
+  var num = document.getElementById('ip').value;
+  console.log(num);
+  var url = "http://localhost:8001/getCot/"+num;
+  ajaxCall(url,"Cot "+num);
+}
+
+function getArcsin(){
+  var num = document.getElementById('ip').value;
+  console.log(num);
+  var url = "http://localhost:8001/getArcSin/"+num;
+  ajaxCall(url,"Arcsin "+num);
+}
+
+function getArccos(){
+  var num = document.getElementById('ip').value;
+  console.log(num);
+  var url = "http://localhost:8001/getArcCos/"+num;
+  ajaxCall(url,"Arccos "+num);
+}
+
+function getArctan(){
+  var num = document.getElementById('ip').value;
+  console.log(num);
+  var url = "http://localhost:8001/getArcTan/"+num;
+  ajaxCall(url,"Arctan "+num);
+}
