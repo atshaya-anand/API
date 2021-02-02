@@ -1,4 +1,4 @@
-function ajaxCall(apiurl,title){
+function ajaxCall(apiurl,title,img=0){
     $.ajax({
     url: apiurl, 
     type:"GET",
@@ -9,13 +9,21 @@ function ajaxCall(apiurl,title){
     success: function(data){
       console.log(data);
       document.getElementById("title").innerHTML = title;
-      document.getElementById('resultValue').innerHTML = data['result'];
+      if (img==0){
+        document.getElementById("img").style.display = "none";
+        document.getElementById('resultValue').innerHTML = data['result'];
+      }
+      else{
+        document.getElementById("img").style.display = "block";
+        document.getElementById("img").src = data['result'];;
+      }
     }
   });
 }
 
 function moveNext(id1,id2){
   document.getElementById(id1).style.display = "none";
+  document.getElementById("img").style.display = "none";
   document.getElementById(id2).style.display = "block";
   document.getElementById("title").innerHTML = '';
   document.getElementById('resultValue').innerHTML = '';
@@ -123,6 +131,18 @@ function getCheckSum(){
   console.log(fig);
   var url = "http://127.0.0.1:5000/getCheckSum?text="+text;
   ajaxCall(url,"Checksum Value");
+}
+
+function getBarCode(){
+  var text = document.getElementById('barText').value;
+  var url = "http://127.0.0.1:5000/getBarCode?text="+text;
+  ajaxCall(url,"Barcode ",1);
+}
+
+function getQRCode(){
+  var text = document.getElementById('QRText').value;
+  var url = "http://127.0.0.1:5000/getQRCode?text="+text;
+  ajaxCall(url,"QRCode ",1);
 }
 
 function generateOTPAlphaNum(){

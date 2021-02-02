@@ -114,10 +114,30 @@
               <input type="text" class="form-control" id="text" placeholder="Enter the text" style="width:50%;">
             </div>
           <button class="btn btn-primary" onclick = "getCheckSum()">Get CheckSum</button><br/><br/>
-          <button class="btn" onclick="moveNext('checksum','OTP')">Next Program!</button>
+          <button class="btn" onclick="moveNext('checksum','barcode')">Next Program!</button>
+      </div>
+      <div id="barcode" style="padding-left: 50px;display: none;">
+        <h3>7 - BarCode</h3><br/>
+        <h5>Display the MD5 checksum for given word.</h5><br/>
+          <div class="form-group">
+            <label for="exampleInput2">Word</label>
+            <input type="text" class="form-control" id="QRText" placeholder="Enter the text" style="width:50%;">
+          </div>
+          <button class="btn btn-success" onclick = "getBarCode()">Get BarCode</button><br/><br/>
+          <button class="btn" onclick="moveNext('barcode','QRcode')">Next Program!</button>
+      </div>
+      <div id="QRcode" style="padding-left: 50px;display: none;">
+        <h3>8 - QRcode</h3><br/>
+        <h5>Display the MD5 checksum for given word.</h5><br/>
+          <div class="form-group">
+            <label for="exampleInput2">Word</label>
+            <input type="text" class="form-control" id="barText" placeholder="Enter the text" style="width:50%;">
+          </div>
+          <button class="btn btn-success" onclick = "getQRCode()">Get QRcode</button><br/><br/>
+          <button class="btn" onclick="moveNext('QRcode','OTP')">Next Program!</button>
       </div>
       <div id="OTP" style="padding-left: 50px;display: none;">
-        <h3>7 - OTP</h3><br/>
+        <h3>9 - OTP</h3><br/>
         <h5>Generate One Time Password.</h5><br/>
         <div class="form-group">
           <label for="exampleInput2">Input 01</label>
@@ -133,6 +153,7 @@
       <h1>Result</h3><br/><br/>
         <h3 id="title"></h5>
         <p id="resultValue"></p><br/>
+        <img style="display: none;" id="img" width="250",height="250"></img>
     </div>
     
     <!-- Optional JavaScript -->
