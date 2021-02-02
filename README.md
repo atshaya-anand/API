@@ -13,7 +13,7 @@ This repository contains few examples for Application Programming Interface (API
 * Generation of QR Code
 * Generation of One Time Password (OTP)
 
-### SET - 01
+### SET - 02
 * Math Log1 Calculator - Logarithm, Natural Logarithm, Anti-log
 * Math Log2 Calculator - Square root, GCD, LCM, Cube root, nth root
 * Math Log3 Calculator - Trignometry - sin, cos, tan, sec, cosec, cot
