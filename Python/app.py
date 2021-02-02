@@ -4,6 +4,7 @@ import random
 from utils import *
 import math 
 import pyqrcode
+import qrcode
 import time
 from barcode import *
 from pyqrcode import QRCode
@@ -612,11 +613,13 @@ def getBarCode():
 def getQRCode():
   data = dict(request.args)
   text = data["text"]
+  #pip install qrcode[pil]
+  img = qrcode.make(text)
+  img.save("qrImg.jpg")
+  #qrcd = pyqrcode.create(text, mode='binary')
+  #qrcd.svg("qrImg.svg", scale=10)
 
-  qrcd = pyqrcode.create(text, mode='binary')
-  qrcd.svg("qrImg.svg", scale=10)
-
-  return jsonify({'result':"../Python/qrImg.svg"})
+  return jsonify({'result':"../Python/qrImg.jpg"})
 
 @app.route('/generateOTPAlphaNum',methods = ['GET'])
 def generateOTPAlphaNumRoute():
