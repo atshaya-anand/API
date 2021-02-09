@@ -171,5 +171,61 @@ def getArcTan():
         result = math.atan(num)
     return jsonify({'result':result})
 
+@app.route('/amps',methods=["GET"])
+def amps():
+    data = dict(request.args)
+    power = int(data["power"])
+    voltage = int(data["voltage"])
+    res = power / voltage
+    return jsonify({'result':str(res)+" amps"})
+
+@app.route('/kVA',methods=["GET"])
+def kVA():
+    data = dict(request.args)
+    current = int(data["current"])
+    voltage = int(data["voltage"])
+    res = (current * voltage)/1000
+    return jsonify({'result':str(res)+" kVA"})
+
+@app.route('/watt',methods=["GET"])
+def watt():
+    data = dict(request.args)
+    current = int(data["current"])
+    voltage = int(data["voltage"])
+    res = current * voltage
+    return jsonify({'result':str(res)+" watts"})
+    
+@app.route('/volts',methods=["GET"])
+def volts():
+    data = dict(request.args)
+    power = int(data["power"])
+    current = int(data["current"])
+    res = power / current
+    return jsonify({'result':str(res)+" volts"})
+    
+@app.route('/mAh',methods=["GET"])
+def mAh():
+    data = dict(request.args)
+    wh = int(data["wh"])
+    voltage = int(data["voltage"])
+    res = (wh*1000)/voltage
+    return jsonify({'result':str(res)+" mAh"})
+
+@app.route('/joules',methods=["GET"])
+def joules():
+    data = dict(request.args)
+    power = int(data["power"])
+    time = int(data["time"])
+    res = power * time
+    return jsonify({'result':str(res)+" joules"})
+
+@app.route('/wh',methods=["GET"])
+def wh():
+    data = dict(request.args)
+    ah = int(data["ah"])
+    voltage = int(data["voltage"])
+    res = ah * voltage
+    return jsonify({'result':str(res)+" Wh"})
+
 if __name__ == '__main__':
 	app.run(debug = True)

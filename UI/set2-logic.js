@@ -153,3 +153,52 @@ function getArctan(){
   var url = "http://localhost:8001/getArcTan/"+num;
   ajaxCall(url,"Arctan "+num);
 }
+
+function getAmps(){
+  var pow = document.getElementById("pow").value;
+  var vol = document.getElementById("vol").value;
+  var url = "http://127.0.0.1:5000/amps?power="+pow+"&voltage="+vol;
+  ajaxCall(url,"Calculation of Amps")
+}
+
+function getkW(){
+  var cur = document.getElementById("cur").value;
+  var vol = document.getElementById("vol").value;
+  var url = "http://127.0.0.1:5000/kVA?current="+cur+"&voltage="+vol;
+  ajaxCall(url,"Calculation of Kilo Watt")
+}
+
+function getVA(){
+  var cur = document.getElementById("cur").value;
+  var vol = document.getElementById("vol").value;
+  var url = "http://127.0.0.1:5000/watt?current="+cur+"&voltage="+vol;
+  ajaxCall(url,"Calculation of Watts")
+}
+
+function getVolts(){
+  var pow = document.getElementById("pow").value;
+  var cur = document.getElementById("cur").value;
+  var url = "http://127.0.0.1:5000/volts?power="+pow+"&current="+cur;
+  ajaxCall(url,"Calculation of volts")
+}
+
+function getJoules(){
+  var pow = document.getElementById("pow").value;
+  var time = document.getElementById("time").value;
+  var url = "http://127.0.0.1:5000/joules?power="+pow+"&time="+time;
+  ajaxCall(url,"Calculation of Joules")
+}
+
+function getMah(){
+  var wh = document.getElementById("wh").value;
+  var vol = document.getElementById("vol").value;
+  var url = "http://127.0.0.1:5000/mAh?wh="+wh+"&voltage="+vol;
+  ajaxCall(url,"Calculation of mAh")
+}
+
+function getWh(){
+  var ah = document.getElementById("ah").value;
+  var vol = document.getElementById("vol").value;
+  var url = "http://127.0.0.1:5000/wh?ah="+ah+"&voltage="+vol;
+  ajaxCall(url,"Calculation of wh")
+}
