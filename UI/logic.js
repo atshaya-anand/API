@@ -162,3 +162,9 @@ function generateOTPAlpha(){
   var url = "http://127.0.0.1:5000/generateOTPAlpha?text="+text;
   ajaxCall(url,"OTP Alpha ");
 }
+
+function generateCaptcha(){
+  var text = document.getElementById('str').value;
+  var url = "http://127.0.0.1:5000/getCaptcha?text="+text;
+  ajaxCall(url,"CAPTCHA ",1);
+}

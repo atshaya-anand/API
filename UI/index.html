@@ -146,6 +146,16 @@
           <button class="btn btn-primary" onclick = "generateOTPAlphaNum()">Get AlphaNumeric</button>
           <button class="btn btn-primary" onclick = "generateOTPNum()">Get Numeric</button>
           <button class="btn btn-primary" onclick = "generateOTPAlpha()">Get Alphabet</button><br/><br/>
+          <button class="btn" onclick="moveNext('OTP','captcha')">Next Program!</button>
+      </div>
+      <div id="captcha" style="padding-left: 50px;display: none;">
+        <h3>10 - CAPTCHA</h3><br/>
+        <h5>Generate CAPTCHA for the given string.</h5><br/>
+        <div class="form-group">
+          <label for="exampleInput2">Input 01</label>
+          <input type="text" class="form-control" id="str" placeholder="Enter the string" style="width:50%;">
+        </div>
+          <button class="btn btn-primary" onclick = "generateCaptcha()">Get CAPTCHA</button><br/><br/>
       </div>
     </div>
         

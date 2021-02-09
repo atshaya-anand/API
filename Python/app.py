@@ -3,11 +3,11 @@ from flask_cors import CORS
 import random
 from utils import *
 import math 
-import pyqrcode
-import qrcode
 import time
-from barcode import *
-from pyqrcode import QRCode
+#import pyqrcode 
+#import png 
+#from pyqrcode import QRCode 
+#from barcode import *
 
 app = Flask(__name__)
 CORS(app)
@@ -613,13 +613,15 @@ def getBarCode():
 def getQRCode():
   data = dict(request.args)
   text = data["text"]
-  #pip install qrcode[pil]
-  img = qrcode.make(text)
-  img.save("qrImg.jpg")
-  #qrcd = pyqrcode.create(text, mode='binary')
-  #qrcd.svg("qrImg.svg", scale=10)
-
-  return jsonify({'result':"../Python/qrImg.jpg"})
+  # Generate QR code 
+  url = pyqrcode.create(text) 
+  
+  # Create and save the svg file naming "myqr.svg" 
+  url.svg("myqr.svg", scale = 8) 
+  
+  # Create and save the png file naming "myqr.png" 
+  url.png('myqr.png', scale = 6) 
+  return jsonify({'result':"../Python/myqr.png"})
 
 @app.route('/generateOTPAlphaNum',methods = ['GET'])
 def generateOTPAlphaNumRoute():
