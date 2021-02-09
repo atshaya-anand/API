@@ -12,8 +12,10 @@ This repository contains few examples for Application Programming Interface (API
 * Generation of Bar Code
 * Generation of QR Code
 * Generation of One Time Password (OTP)
+* Generation of CAPTCHA
 
 ### SET - 02
+* Electrical Calculator - Amps, kW, kVA, VA, volts, watts, joules, mAh, Wh
 * Math Log1 Calculator - Logarithm, Natural Logarithm, Anti-log
 * Math Log2 Calculator - Square root, GCD, LCM, Cube root, nth root
 * Math Log3 Calculator - Trignometry - sin, cos, tan, sec, cosec, cot
