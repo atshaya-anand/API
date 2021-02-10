@@ -8,6 +8,7 @@ app.use(cors());
 const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal,getWord,getCheckSum,generateOTPAlphaNum,generateOTPNum,generateOTPAlpha, barCode, captcha} = require('./function.js');
 const {getVariance, getStandardDeviation, getLinearRegression, computeGCD, computeLcm, sqrt, nthroot, ln, log, antiLog,sine,cosine,tan,arcSin} = require('./set2-programs');
 const { amps, kVA, watt, volts, mAh, wh, joules } = require('./elecCalc.js');
+const { getEncrypt, getDecrypt } = require('./rsa.js');
 
 app.get('/getDateDiff/:date1/:date2',async (req, res, next)=>{
     try{
@@ -409,4 +410,22 @@ app.get('/captcha/:text',async (req,res,next)=>{
     }
 });
 
-app.listen(8001,()=>console.log('Connected on PORT 8000'));
+app.get('/encrypt/:msg',async (req,res,next)=>{
+    try{
+        res.send(await getEncrypt(req.params.msg));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/decrypt/:encmsg/:key',async (req,res,next)=>{
+    try{
+        res.send(await getDecrypt(req.params.encmsg,req.params.key));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.listen(8001,()=>console.log('Connected on PORT 8001'));
