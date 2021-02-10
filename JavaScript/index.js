@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal,getWord,getCheckSum,generateOTPAlphaNum,generateOTPNum,generateOTPAlpha, barCode} = require('./function.js');
+const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal,getWord,getCheckSum,generateOTPAlphaNum,generateOTPNum,generateOTPAlpha, barCode, captcha} = require('./function.js');
 const {getVariance, getStandardDeviation, getLinearRegression, computeGCD, computeLcm, sqrt, nthroot, ln, log, antiLog,sine,cosine,tan,arcSin} = require('./set2-programs');
 const { amps, kVA, watt, volts, mAh, wh, joules } = require('./elecCalc.js');
 
@@ -394,6 +394,15 @@ app.get('/wh/:ah/:vol',async (req, res, next)=>{
 app.get('/barCode/:text/:intWT/:intHT',async (req,res,next)=>{
     try{
         res.send(await barCode(req.params.text,req.params.intWT,req.params.intHT));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/captcha/:text',async (req,res,next)=>{
+    try{
+        res.send(await captcha(req.params.text));
     }
     catch(err){
         next(err);

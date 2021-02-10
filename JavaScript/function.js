@@ -1,4 +1,5 @@
 const {MD5} = require('./md5.js');
+const { createCanvas, loadImage } = require('canvas')
 
 var array5bit_A = [ 'f//AAAAAAAAAAAAAAAAAAAA', 'f//AAAAAAAAAAAAAAAAAAAB', 'f//AAAAAAAAAAAAAAEAAAD/', 'f//AAAAAAAAAAAAAAEAAAAA', 'f//AAAAAAAAAQAAAP8AAAAA', 'f//AAAAAAAAAQAAAP8AAAAB', 'f//AAAAAAAAAQAAAAAAAAD/', 'f//AAAAAAAAAQAAAAAAAAAA', 'f//AAABAAAA/wAAAAAAAAAA', 'f//AAABAAAA/wAAAAAAAAAB', 'f//AAABAAAA/wAAAAEAAAD/', 'f//AAABAAAA/wAAAAEAAAAA', 'f//AAABAAAAAAAAAP8AAAAA', 'f//AAABAAAAAAAAAP8AAAAB', 'f//AAABAAAAAAAAAAAAAAD/', 'f//AAABAAAAAAAAAAAAAAAA', 'QD/AAD/AAAAAAAAAAAAAAAA', 'QD/AAD/AAAAAAAAAAAAAAAB', 'QD/AAD/AAAAAAAAAAEAAAD/', 'QD/AAD/AAAAAAAAAAEAAAAA', 'QD/AAD/AAAAAQAAAP8AAAAA', 'QD/AAD/AAAAAQAAAP8AAAAB', 'QD/AAD/AAAAAQAAAAAAAAD/', 'QD/AAD/AAAAAQAAAAAAAAAA', 'QD/AAAAAAAA/wAAAAAAAAAA', 'QD/AAAAAAAA/wAAAAAAAAAB', 'SL/AADeAAAA/gAAAAIAAAD+', 'QD/AAAAAAAA/wAAAAEAAAAA', 'QD/AAAAAAAAAAAAAP8AAAAA', 'QD/AAAAAAAAAAAAAP8AAAAB', 'QD/AAAAAAAAAAAAAAAAAAD/', 'QD/AAAAAAAAAAAAAAAAAAAA'];
 var array5bit_B = [ 'US0CAuSD38g', 'UUYCA7QBErs', 'ajEDAm49ReY', 'UUoCA+juogg', 'bjEDAjQrOn0', 'bkoDA3iPVH4', 'ajUDAt82atY', 'UU4CA1nljTg', 'cjEDAghkmFU', 'ckoDA0TA9lY', 'izUEAhrxcbg', 'ck4DAxY8F10', 'bjUDAlvFFR8', 'bk4DAxdhexw', 'ajkDAr7LFAw', 'UVICAyQ+UJI', 'TTECAq7UnEM', 'TUoCA+Jw8kA', 'ZjUDAmZGozo', 'TU4CA7CME0s', 'ajUDAvnk9E4', 'ak4DA7VAmk0', 'ZjkDAtle3bI', 'TVICAxOyzrM', 'STUCAqHeHtM', 'SU4CA+16cNA', 'h6QEAZKdo54', 'SVICA62zYxM', 'RTkCAqx1lb4', 'RVICA/z3WM0', 'QT0CAkdoxRU', 'KFYBA46vJCA'];
@@ -93,6 +94,28 @@ function barCode(inputString, intWidth, intHeight){
     }
     return resultString;
     }
+
+function captcha(code){
+
+    var tCtx = createCanvas(code.length * 30, 50).getContext('2d')
+    var newElem = code;
+    var colors = ['red', 'green', 'blue', 'orange', 'yellow'];
+    tCtx.font = '22pt "Calibri"';
+    tCtx.fillText(newElem, 10, 30);
+    tCtx.beginPath()
+    for (let index = 0; index < code.length; index++) {
+        tCtx.strokeStyle = colors[Math.floor(Math.random() * colors.length)];
+        tCtx.lineTo(Math.floor(Math.random() * code.length * 50), Math.floor(Math.random() * code.length))
+        tCtx.lineTo(Math.floor(Math.random() * code.length), Math.floor(Math.random() * code.length * 50))
+        tCtx.stroke()
+    }
+
+    var src = tCtx.canvas.toDataURL();
+    var stringStart = '<img src="';
+    var ending = '">';
+    var res = stringStart + src + ending;
+    return res;
+}
 
 
 function dateDiff(date1, date2) {
@@ -510,5 +533,6 @@ module.exports = { dateDiff,
                    generateOTPAlphaNum,
                    generateOTPNum,
                    generateOTPAlpha,
-                   barCode
+                   barCode,
+                   captcha
                  };
