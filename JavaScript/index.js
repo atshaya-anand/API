@@ -7,6 +7,7 @@ app.use(cors());
 
 const {getSetUnion, getSetIntersection, getSetDiff, dateDiff, getMatTranspose, getLowerDiagonal, getUpperDiagonal,getWord,getCheckSum,generateOTPAlphaNum,generateOTPNum,generateOTPAlpha} = require('./function.js');
 const {getVariance, getStandardDeviation, getLinearRegression, computeGCD, computeLcm, sqrt, nthroot, ln, log, antiLog,sine,cosine,tan,arcSin} = require('./set2-programs');
+const { amps, kVA, watt, volts, mAh, wh, joules } = require('./elecCalc.js');
 
 app.get('/getDateDiff/:date1/:date2',async (req, res, next)=>{
     try{
@@ -321,6 +322,69 @@ app.get('/getCot/:num/',async (req, res, next)=>{
     try{
         //console.log(req.query,"dw");
         res.send(await tan(req.params.num,1));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/amps/:pow/:vol',async (req, res, next)=>{
+    try{
+        res.send(await amps(req.params.pow,req.params.vol));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/kVA/:cur/:vol',async (req, res, next)=>{
+    try{
+        res.send(await kVA(req.params.cur,req.params.vol));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/watt/:cur/:vol',async (req, res, next)=>{
+    try{
+        res.send(await watt(req.params.cur,req.params.vol));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/volts/:pow/:cur',async (req, res, next)=>{
+    try{
+        res.send(await volts(req.params.pow,req.params.cur));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/joules/:pow/:time',async (req, res, next)=>{
+    try{
+        res.send(await joules(req.params.pow,req.params.time));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/mAh/:wh/:vol',async (req, res, next)=>{
+    try{
+        res.send(await mAh(req.params.wh,req.params.vol));
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+app.get('/wh/:ah/:vol',async (req, res, next)=>{
+    try{
+        res.send(await wh(req.params.ah,req.params.vol));
     }
     catch(err){
         next(err);
