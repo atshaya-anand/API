@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const qrcode = require('qrcode');
 
 const app = express();
 app.use(express.json());
@@ -427,5 +428,21 @@ app.get('/decrypt/:encmsg/:key',async (req,res,next)=>{
         next(err);
     }
 });
+
+async function run(message, pres) {
+    var src;
+    await qrcode.toDataURL(message).then(res => {
+        src = res;
+        var stringStart = '<img src="';
+        var ending = '">';
+        var rs = stringStart + src + ending;
+        return rs;
+    })
+}
+
+app.get('/qrcode/:word', (req, res) => {
+    var message = req.params.word;
+    run(message, res).catch(error => console.error(error.stack));
+})
 
 app.listen(8001,()=>console.log('Connected on PORT 8001'));
