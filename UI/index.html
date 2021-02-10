@@ -121,7 +121,7 @@
         <h5>Display the Bar Code for given word.</h5><br/>
           <div class="form-group">
             <label for="exampleInput2">Word</label>
-            <input type="text" class="form-control" id="QRText" placeholder="Enter the text" style="width:50%;">
+            <input type="text" class="form-control" id="barText" placeholder="Enter the text" style="width:50%;">
           </div>
           <button class="btn btn-primary" onclick = "getBarCode()">Get BarCode</button><br/><br/>
           <button class="btn" onclick="moveNext('barcode','QRcode')">Next Program!</button>
@@ -131,7 +131,7 @@
         <h5>Display the QR Code for given word.</h5><br/>
           <div class="form-group">
             <label for="exampleInput2">Word</label>
-            <input type="text" class="form-control" id="barText" placeholder="Enter the text" style="width:50%;">
+            <input type="text" class="form-control" id="QRText" placeholder="Enter the text" style="width:50%;">
           </div>
           <button class="btn btn-primary" onclick = "getQRCode()">Get QRcode</button><br/><br/>
           <button class="btn" onclick="moveNext('QRcode','OTP')">Next Program!</button>

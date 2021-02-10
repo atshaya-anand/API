@@ -15,11 +15,14 @@ function ajaxCall(apiurl,title,img=0){
       }
       else{
         document.getElementById("img").style.display = "block";
+        document.getElementById("img").src = data['result'];
+        /*
 	      data = data.split(">");
         var s = data[0];
         s = s.split('"');
         console.log('---->',s[1]);
         document.getElementById('img').src = s[1];
+        */
       }
     }
   });
@@ -138,7 +141,9 @@ function getCheckSum(){
 }
 
 function getBarCode(){
-  
+  var text = document.getElementById('barText').value;
+  var url = "http://127.0.0.1:5000/getBarCode?text="+text;
+  ajaxCall(url,"BarCode ",1);
 }
 
 function getQRCode(){

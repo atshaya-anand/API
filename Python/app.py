@@ -4,15 +4,28 @@ import random
 from utils import *
 import math 
 import time
-#import pyqrcode 
+import datetime
+import pyqrcode 
+from captcha import generate_captcha
 #import png 
-#from pyqrcode import QRCode 
-#from barcode import *
+from pyqrcode import QRCode 
+from barcode import *
+import os
 
 app = Flask(__name__)
 CORS(app)
 
 public = tuple()
+
+def removePrevious(text,dirN):
+
+  files = os.listdir(dirN)
+  #print(files)
+  for fileN in files:
+    if text in fileN:
+        if ".jpg" in fileN or ".svg" in fileN:
+            os.remove(fileN)
+  return
 
 class Date:
     def __init__(self, d, m, y,h=0,mi=0,s=0):
@@ -604,24 +617,22 @@ def generateOTPNum(OtpSize) :
 def getBarCode():
   data = dict(request.args)
   text = data["text"]
-  
-  code128_image(text).save("img.jpg")
+  removePrevious("img","./")
+  imgCode = str(datetime.datetime.now().time().second)
+  code128_image(text).save("img"+imgCode+".jpg")
 
-  return jsonify({'result':"../Python/img.jpg"})
+  return jsonify({'result':"../Python/img"+imgCode+".jpg"})
 
 @app.route('/getQRCode',methods = ['GET'])
 def getQRCode():
   data = dict(request.args)
   text = data["text"]
-  # Generate QR code 
-  url = pyqrcode.create(text) 
-  
-  # Create and save the svg file naming "myqr.svg" 
-  url.svg("myqr.svg", scale = 8) 
-  
-  # Create and save the png file naming "myqr.png" 
-  url.png('myqr.png', scale = 6) 
-  return jsonify({'result':"../Python/myqr.png"})
+  removePrevious("qrImg","../Python")
+  qrcd = pyqrcode.create(text, mode='binary')
+  imgCode = str(datetime.datetime.now().time().second)
+  qrcd.svg("qrImg"+imgCode+".svg", scale=10)
+
+  return jsonify({'result':"../Python/qrImg"+imgCode+".svg"})
 
 @app.route('/generateOTPAlphaNum',methods = ['GET'])
 def generateOTPAlphaNumRoute():
@@ -640,6 +651,14 @@ def generateOTPAlphaRoute():
   data = dict(request.args)
   OtpSize = int(data["text"])
   return jsonify({'result':generateOTPAlpha(OtpSize)})
+
+@app.route('/getCaptcha',methods = ['GET'])
+def getCaptcha():
+  data = dict(request.args)
+  text = data["text"]
+  removePrevious("captcha","./")
+  imgCode = generate_captcha(text)
+  return jsonify({'result':"../Python/captcha"+imgCode+".jpg"})
 
 if __name__ == '__main__':
 	app.run(debug = True)
