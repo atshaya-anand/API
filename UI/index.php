@@ -339,3 +339,351 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		echo "Captcha saved";
 	}
 ?>
+
+// Electric Calculator
+<?php 
+    function electical_calc(){
+    $find=$_POST['find'];
+    $power=$_POST['power'];
+    $current=$_POST['current'];
+    $voltage=$_POST['voltage'];
+    $resistance=$_POST['resistance'];
+    $time=$_POST['time'];
+    $Ah=$_POST['Ah'];
+    $Wh=$_POST['Wh'];
+    if ($find=== "amps") {
+    $result = ($power /$voltage);
+    echo $result;
+    } 
+    else if ($find === "kiloWatt"||$find=== "kVA") {
+    $result = (($current * $voltage) / 1000);
+    echo $result;
+    } 
+    else if ($find === "Watt"||$find === "VA") {
+    $result=($current * $voltage) ;
+    echo $result;
+    } 
+    else if ($find=== "volts") {
+    $result=$current * $resistance;
+    $result1=$power /$current;
+    echo $result;
+    echo $result1;
+    } 
+    else if ($find=== "joules") {
+    $result=($power * $time);
+    echo $result;
+    } 
+    else if ($find === "mAh") {
+    $result=($Wh * 1000) / $voltage ;
+    echo $result;
+    } 
+    else if ($find === "Wh") {
+    $result=(($Ah * $voltage));
+    echo $result;
+    } 
+    }
+?> 
+
+TRIGONOMETRIC FUNCS - MATH LOG 3
+<?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
+header('Content-type: application/json');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  
+    $param_degree = $_POST['degree'];
+    $param_radian = $_POST['radian'];
+    $res=array();
+    $param=array();
+    if(strlen($param_degree)>0){
+        array_push($param, $param_degree);
+        array_push($param, "-");
+        $res= GenerateList(radian((float)$param_degree)); 
+    }else{
+        array_push($param, "-");
+        array_push($param, $param_radian);
+        $res= GenerateList(((float)$param_radian)); 
+    }
+   
+   
+    $Obj = new \stdClass();
+    $Obj->title = "trignomentry";
+    $Obj->language = "PHP";
+    $Obj->result = $res;
+    $Obj->params = $param;
+    $Obj->question = "trignomentry";
+    $Obj->status = 200;
+     $output = new \stdClass();
+    $output->data=(object)$Obj;
+    $output->status=200;
+    $JSON = json_encode($output);
+    echo $JSON;
+}
+
+function GenerateList($rad){
+    $res= array();
+    array_push($res, sin($rad));
+    array_push($res, cos($rad));
+    array_push($res, tan($rad));
+    array_push($res, asin($rad));
+    array_push($res, acos($rad));
+    array_push($res, atan($rad)); 
+    return $res;
+}
+function radian($degree){
+    return $degree*(pi()/180);
+}
+
+?>
+
+LOG 1 CALC - LOG/LN/ANTILOG
+<?php
+    // required headers
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Headers: *");
+    header("Access-Control-Allow-Methods: GET");
+    header("Access-Control-Allow-Credentials: true");
+    header('Content-Type: application/json');
+    function myLog($n,$b)
+    {
+        $r=ln($n)/ln($b);
+        return $r;
+    }
+    function ln($x)
+    {
+        $n=100000.0;
+        $p=pow($x,(1/$n));
+        return $n*($p-1);
+    }
+    function antilog($n,$b)
+    {
+        return pow($b,$n);
+    }
+    $number=isset($_GET['number']) ? $_GET['number'] : die();
+    $op=isset($_GET['operation']) ? $_GET['operation'] : die();
+    $number=floatval($number);
+    $base;
+    $r=0.0;
+    if($op=="log")
+    {
+        $base=isset($_GET['base']) ? $_GET['base'] : die();
+        $base=floatval($base);
+        $r=myLog($number,$base);
+        $r=round($r,3);
+    }
+    else if($op=="antilog")
+    {
+        $base=isset($_GET['base']) ? $_GET['base'] : die();
+        $base=floatval($base);
+        $r=antilog($number,$base);
+        $r=round($r,4);
+    }
+    else
+    {
+        $r=ln($number);
+        $r=round($r,4);
+    }
+    $res=(object)[ "result" => $r];
+    echo json_encode($res);
+?>
+
+
+LOG 2 CALC - GCD/LCM , ROOT
+<?php
+function getGcd($n1,$n2)
+	{
+		if ($n1>$n2)
+		{	$num=$n1;
+			$den=$n2;
+		}
+		else
+		{
+			$num=$n2;
+			$den=$n1;
+		}
+		$r=$num%$den;
+		while($r!=0)
+		{
+			$num=$den;
+			$den=$r;
+			$r=$num%$den;
+		}
+		$gcd=$den;
+		
+		return $gcd;
+	}
+
+function diffCube($n,$mid)
+    {
+		$mid3=$mid*$mid*$mid;
+		if ($n>$mid3)
+			return $n-$mid3;
+		return $mid3-$n; 
+	}
+function binarySearchCube($start,$end,$e,$num)
+	{
+		while(1)
+		{	
+		$mid=($start+$end)/2;
+		$error=diffCube($num,$mid);
+		if ($error<=$e)
+			return $mid;
+		if (($mid*$mid*$mid)>$num)
+			$end=$mid;
+		else
+			$start=$mid;
+		}
+	}
+
+$data=isset($_GET['data']) ? $_GET['data'] : die();
+$operation=isset($_GET['operation']) ? $_GET['operation'] : die();
+$numbers=explode(",",$data);
+$numbers = array_map(function($value) {
+    return floatval($value);
+}, $numbers);
+//echo $data,$operation;
+$r=0;
+
+if ($operation=="gcd" || $operation=="lcm")
+	{
+		if(sizeof($numbers)==1)
+			$r=$numbers[0];
+		else
+		{
+			$gcd=getGcd($numbers[0],$numbers[1]);
+			$lcm=$numbers[0]*$numbers[1]/$gcd;
+
+			if(sizeof($numbers)>2)
+			{	
+				for($i=0;$i<sizeof($numbers);$i++)
+					{
+						$gcd=getGcd($gcd,$numbers[$i]);
+						$lcm=($numbers[$i]*$lcm)/floatval(getGcd($numbers[$i],$lcm));
+					}
+			}
+			if($operation=="gcd")
+				$r=$gcd;
+			else
+				$r=$lcm;
+		}
+	}
+else if ($operation=="sqrt")
+	{
+		$num=floatval($numbers[0]);
+		if($num==0)
+			$r=0;
+		else
+		{
+			$g=$num/2.0;
+			$g2=$g+1;
+			while($g!=$g2)
+			{
+				$n=$num/$g;
+				$g2=$g;
+				$g=($g+$n)/2;
+
+			}
+			//r=g.toPrecision(6)
+			$r=$g;
+			$r=round($g,6); 
+		}
+		
+	}
+else if($operation=="cbrt")
+	{
+		$num=floatval($numbers[0]);
+		$start=0;
+		$end=$num;
+		$e=0.0000001;
+		$r=binarySearchCube($start,$end,$e,$num);
+		//r=r.toPrecision(5)
+		$r=round($r,6);
+
+	}
+else if ($operation=="nrt")
+	{
+		$a=$numbers[0];
+		$n=$numbers[1];
+		$x_pre=rand()%10;
+		$e=0.001;
+		$maxX=PHP_INT_MAX;
+		$x_cur;
+		while($maxX>$e)
+		{
+			$x_cur=((int)($n-1.0)*$x_pre+$a/(int)pow($x_pre,$n-1))/$n;
+			$maxX=abs($x_cur-$x_pre);
+			$x_pre=$x_cur;
+			//r=r.toPrecision(5)
+		}
+		$r=$x_cur;
+		$r=floor($x_cur);
+
+	}
+
+$res=(object)[ "result" => $r];
+
+echo json_encode($res);
+?>
+
+// STATISTICAL CALCULATOR 
+<?php 
+    function statcal(){
+    $data=$_POST['data']; 
+    $type=$_POST['type'];
+    $result=0;
+    //echo $type;
+    if ($type==1){
+        $result=getStandardDeviation($data);
+    }
+    else if ($type==2){
+        $result=getVariance($data);
+    }
+    else{  
+        $result=getLinearRegressionEqu($data[0],$data[1]);
+    }
+    echo $result;
+    }
+
+    function getStandardDeviation($data){
+        $standardDeviation=sqrt(getVariance($data));
+        return $standardDeviation;
+    }
+
+    function getVariance($data){
+        $sum=0;
+        $count=0;
+        $mean=0;
+        $variance=0;
+        foreach($data as $value){
+            $sum=$sum+$value;
+            $count=$count+1;
+        }
+        $mean=$sum/$count;
+        foreach ($data as $value){
+            $variance=$variance+(($value-$mean)*($value-$mean));
+        }
+        $variance=$variance/$count;
+        return $variance;
+    }
+
+    function  getLinearRegressionEqu($X,$Y){
+        $sumOfX=0;
+        $sumOfY=0;
+        $sumOfX2=0;
+        $sumOfXY=0;
+        $ctr=0;
+        for($i=0;$i<count($X);$i++){
+            $sumOfX=$sumOfX+$X[$i];
+            $sumOfY=$sumOfY+$Y[$i];
+            $sumOfXY=$sumOfXY+($X[$i]*$Y[$i]);
+            $sumOfX2=$sumOfX2+($X[$i]*$X[$i]);
+            $ctr=$ctr+1;
+        }
+        $b=($sumOfXY-(($sumOfX*$sumOfY)/$ctr))/($sumOfX2-(($sumOfX*$sumOfX)/$ctr));
+        $a=($sumOfY-($b*$sumOfX))/$ctr;
+        $a=round($a,2);
+        $b=round($b,2);
+        return "Y=".$b."X+".$a;
+        }
+?> 
