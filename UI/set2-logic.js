@@ -47,7 +47,7 @@ function getGCD(){
   var num1 = document.getElementById('num1').value;
   var num2 = document.getElementById('num2').value;
   console.log(num1,num2);
-  var url = "http://localhost:8001/getGCD/"+num1+"/"+num2;
+  var url = "http://localhost:8001/getGCD?num1="+num1+"&num2="+num2;
   ajaxCall(url,"GCD");
 }
 
@@ -55,15 +55,15 @@ function getLCM(){
   var num1 = document.getElementById('num1').value;
   var num2 = document.getElementById('num2').value;
   console.log(num1,num2);
-  var url = "http://localhost:8001/getLCM/"+num1+"/"+num2;
+  var url = "http://localhost:8001/getLCM?num1="+num1+"&num2="+num2;
   ajaxCall(url,"LCM");
 }
 
 function getnthRoot(){
   var n = document.getElementById('n').value;
-  var num = document.getElementById('num').value;
-  console.log(n,num);
-  var url = "http://localhost:8001/getnthRoot/"+n+"/"+num;
+  var num1 = document.getElementById('number').value;
+  console.log(n,num1);  
+  var url = "http://127.0.0.1:5000/getnRoot?n="+n+"&num="+num1;
   var x = n + "th Root";
   ajaxCall(url,x);
 }

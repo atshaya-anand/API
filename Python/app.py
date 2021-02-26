@@ -5,11 +5,11 @@ from utils import *
 import math 
 import time
 import datetime
-import pyqrcode 
-from captcha import generate_captcha
+#import pyqrcode 
+#from captcha import generate_captcha
 #import png 
-from pyqrcode import QRCode 
-from barcode import *
+#from pyqrcode import QRCode 
+#from barcode import *
 import os
 
 app = Flask(__name__)

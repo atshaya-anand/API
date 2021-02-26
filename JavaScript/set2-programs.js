@@ -258,6 +258,7 @@ const nthroot = async (n,num) => {
         if(x_0 == x_1){
             var result = {};
             result['result'] = x_1;
+            console.log(result);
             return result;
         }
     }
